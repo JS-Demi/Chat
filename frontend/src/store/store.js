@@ -1,11 +1,20 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { loginApi } from '../services/loginApi'
-import authReducer from './slices/authSlice'
+import { api as loginApi } from '../services/authenticationApi.js'
+import { api as channelsApi } from '../services/channelsApi.js'
+import { api as messagesApi } from '../services/messagesApi.js'
+import common from './slices/commonSlice.js'
 
 export const store = configureStore({
 	reducer: {
+		common,
+		[channelsApi.reducerPath]: channelsApi.reducer,
+		[messagesApi.reducerPath]: messagesApi.reducer,
 		[loginApi.reducerPath]: loginApi.reducer,
-		auth: authReducer,
 	},
-	middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(loginApi.middleware),
+	middleware: (getDefaultMiddleware) =>
+		getDefaultMiddleware().concat([
+			loginApi.middleware,
+			channelsApi.middleware,
+			messagesApi.middleware,
+		]),
 })

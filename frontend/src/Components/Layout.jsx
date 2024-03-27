@@ -1,11 +1,17 @@
 import React from 'react'
-import { Link, Outlet } from 'react-router-dom'
+import { Link, Outlet, useNavigate } from 'react-router-dom'
+import { useAuth } from '../hooks/useAuth'
 
 const Layout = () => {
-	const isLoggedIn = localStorage.getItem('access_token')
+	// get access data
+	const isLoggedIn = useAuth()
+
+	const navigate = useNavigate()
 
 	const handleLogout = () => {
 		localStorage.removeItem('access_token')
+		localStorage.removeItem('user')
+		navigate('/login')
 		console.log('logout')
 	}
 	return (
