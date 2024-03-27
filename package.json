@@ -12,6 +12,9 @@
 	"author": "Miracle",
 	"license": "ISC",
 	"dependencies": {
-		"@hexlet/chat-server": "^2.0.3"
+		"@hexlet/chat-server": "^2.0.3",
+		"bootstrap": "^5.3.3",
+		"formik": "^2.4.5",
+		"react-bootstrap": "^2.10.2"
 	}
 }
