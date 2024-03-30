@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { io } from 'socket.io-client'
 
 const prepareHeaders = (headers) => {
 	const token = localStorage.getItem('access_token')
@@ -11,29 +12,36 @@ const prepareHeaders = (headers) => {
 export const api = createApi({
 	reducerPath: 'messages',
 	baseQuery: fetchBaseQuery({ baseUrl: 'api/v1/messages', prepareHeaders }),
-	tagTypes: ['Messages'],
+	tagTypes: ['Message'],
 	endpoints: (builder) => ({
 		getMessages: builder.query({
 			query: () => '',
-			providesTags: ['Messages'],
+			providesTags: (result, error, arg) =>
+				result ? [...result.map(({ channelId }) => ({ type: 'Message', id: channelId })), 'Message'] : ['Message'],
+			async onCacheEntryAdded(arg, { updateCachedData, cacheDataLoaded, cacheEntryRemoved }) {
+				const socket = io()
+				try {
+					await cacheDataLoaded
+
+					socket.on('newMessage', (message) => {
+						updateCachedData((draft) => {
+							draft.push(message)
+						})
+					})
+				} catch {
+					console.log('something went wrong')
+				}
+				await cacheEntryRemoved
+				socket.off('newMessage')
+			},
 		}),
+
 		sendMessage: builder.mutation({
 			query: (body) => ({
 				url: '',
 				method: 'POST',
 				body,
 			}),
-			async onQueryStarted(message, { dispatch, queryFulfilled }) {
-				const patchResult = dispatch(
-					api.util.updateQueryData('getMessages', undefined, (draft) => {
-						draft.push(message)
-						console.log('it workss')
-						console.log(queryFulfilled)
-						console.log(draft)
-					})
-				)
-				queryFulfilled.catch(patchResult.undo)
-			},
 		}),
 		editMessage: builder.mutation({
 			query: ({ message, id }) => ({
@@ -53,9 +61,13 @@ export const api = createApi({
 	}),
 })
 
-export const {
-	useGetMessagesQuery,
-	useSendMessageMutation,
-	useEditMessageMutation,
-	useDeleteMessageMutation,
-} = api
+export const { useGetMessagesQuery, useSendMessageMutation, useEditMessageMutation, useDeleteMessageMutation } = api
+
+// async onQueryStarted(message, { dispatch, queryFulfilled }) {
+// 	const patchResult = dispatch(
+// 		api.util.updateQueryData('getMessages', undefined, (draft) => {
+// 			draft.push(message)
+// 		})
+// 	)
+// 	queryFulfilled.catch(patchResult.undo)
+// },

@@ -4,7 +4,7 @@ import RoutesList from '../../Routes/RoutesList'
 
 const App = () => {
 	return (
-		<div className='mainContainer'>
+		<div className='d-flex flex-column h-100'>
 			<Layout />
 			<RoutesList />
 		</div>

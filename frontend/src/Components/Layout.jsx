@@ -18,18 +18,11 @@ const Layout = () => {
 		<>
 			<nav className='shadow-sm navbar navbar-expand-lg navbar-light bg-white'>
 				<div className='container'>
-					<Link
-						to={'/'}
-						className='navbar-brand'
-					>
+					<Link to={'/'} className='navbar-brand'>
 						Friendly Chat
 					</Link>
 					{!!isLoggedIn && (
-						<button
-							onClick={handleLogout}
-							className='btn btn-primary'
-							type='button'
-						>
+						<button onClick={handleLogout} className='btn btn-primary' type='button'>
 							Выйти
 						</button>
 					)}

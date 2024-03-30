@@ -1,13 +1,14 @@
 import React from 'react'
-import LoginFooter from './LoginFooter'
+import '../SignupPage/SignupPage.scss'
 import LoginForm from './LoginForm'
 
 const LoginPage = () => {
 	return (
-		<>
-			<LoginForm />
-			<LoginFooter />
-		</>
+		<div className='auth_box'>
+			<div className='wrapper'>
+				<LoginForm />
+			</div>
+		</div>
 	)
 }
 
