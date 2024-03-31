@@ -1,10 +1,10 @@
 import React from 'react'
 import { Link, Outlet, useNavigate } from 'react-router-dom'
-import { useAuth } from '../hooks/useAuth'
+import { useLocalStorage } from '../hooks/useLocalStorage'
 
 const Layout = () => {
 	// get access data
-	const isLoggedIn = useAuth()
+	const isLoggedIn = useLocalStorage()
 
 	const navigate = useNavigate()
 

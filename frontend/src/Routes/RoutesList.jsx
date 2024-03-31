@@ -4,10 +4,10 @@ import ErrorPage from '../Pages/ErrorPage/ErrorPage'
 import LoginPage from '../Pages/LoginPage/LoginPage'
 import MainPage from '../Pages/MainPage/MainPage'
 import SignupPage from '../Pages/SignupPage/SignupPage'
-import { useAuth } from '../hooks/useAuth'
+import { useLocalStorage } from '../hooks/useLocalStorage'
 
 const PrivateRoute = ({ children }) => {
-	const access = useAuth()
+	const access = useLocalStorage()
 
 	return access ? children : <Navigate to='/login' />
 }

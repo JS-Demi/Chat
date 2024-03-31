@@ -28,6 +28,15 @@ const MainPage = () => {
 					<div className='d-flex mt-1 justify-content-between mb-2 ps-4 pe-2 p-4'>
 						<b>{t('chat.channels.header')}</b>
 						<button
+							type='button'
+							className='btn btn-primary'
+							onClick={() => {
+								throw new Error('testError')
+							}}
+						>
+							testError
+						</button>
+						<button
 							data-id={null}
 							onClick={handleUserAction('addChannel')}
 							type='button'

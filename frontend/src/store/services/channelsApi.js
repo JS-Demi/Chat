@@ -55,10 +55,10 @@ export const api = createApi({
 			}),
 		}),
 		renameChannel: builder.mutation({
-			query: (body) => ({
-				url: body.id,
+			query: ({ body, id }) => ({
+				url: id,
 				method: 'PATCH',
-				body: body.name,
+				body,
 			}),
 		}),
 		removeChannel: builder.mutation({

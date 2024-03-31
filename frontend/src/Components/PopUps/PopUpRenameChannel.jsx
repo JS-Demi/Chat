@@ -1,4 +1,5 @@
 import { ErrorMessage, Field, Form, Formik } from 'formik'
+import * as filter from 'leo-profanity'
 import React, { useEffect, useRef } from 'react'
 import { Modal } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
@@ -26,12 +27,12 @@ const PopUpRenameChannel = ({ modalInfo, handleClose }) => {
 	// get id of the channel to change and channel for initial state
 	const { id } = modalInfo
 	const channel = channels.find((c) => c.id === id)
-	const token = localStorage.getItem('access_token')
 	// create handle submit for rename channel
 	const handleSubmit = ({ name }) => {
 		// filter bad words
-		// const filtered = filter.clean(name, '*', 0)
-		const data = { name, id }
+		const filtered = { name: filter.clean(name, '*', 0) }
+		console.log(filtered)
+		const data = { body: filtered, id }
 		renameChannel(data)
 			.unwrap()
 			.then((res) => {
