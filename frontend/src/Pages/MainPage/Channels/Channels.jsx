@@ -1,18 +1,19 @@
-import cn from 'classnames'
 import React from 'react'
 import Button from 'react-bootstrap/Button'
 import ButtonGroup from 'react-bootstrap/ButtonGroup'
 import Dropdown from 'react-bootstrap/Dropdown'
-import { useGetChannelsQuery } from '../../../services/channelsApi'
+import { useTranslation } from 'react-i18next'
+import { useGetChannelsQuery } from '../../../store/services/channelsApi'
 
 const Channels = ({ handleUserAction, activeChannel, setActiveChannel }) => {
-	// get channels from store
-	const { data: channels, refetch, error } = useGetChannelsQuery()
+	// use hooks for i18n and channels data
+	const { t } = useTranslation()
+	const { data: channels } = useGetChannelsQuery()
 
-	// get activeChannel ID from store
+	// get if of active channel from state
 	const { id: activeChannelId } = activeChannel
 
-	// change active channel
+	// create handle for change active channel
 	const handleSetActiveChannel = ({ currentTarget }) => {
 		const { id, name } = currentTarget
 		setActiveChannel({ id, name })
@@ -21,17 +22,15 @@ const Channels = ({ handleUserAction, activeChannel, setActiveChannel }) => {
 	return channels?.map(({ name, id, removable }) => (
 		<li className='nav-item w-100' key={id}>
 			{!removable ? (
-				<button
+				<Button
 					onClick={handleSetActiveChannel}
 					id={id}
 					name={name}
-					type='button'
-					className={cn('w-100 rounded-0 text-start btn', {
-						'btn-secondary': activeChannelId === id,
-					})}
+					className='w-100 rounded-0 text-start'
+					variant={activeChannelId === id ? 'secondary' : ''}
 				>
 					<span className='me-1'># {name}</span>
-				</button>
+				</Button>
 			) : (
 				<>
 					<Dropdown as={ButtonGroup} className='d-flex'>
@@ -47,13 +46,13 @@ const Channels = ({ handleUserAction, activeChannel, setActiveChannel }) => {
 						<Dropdown.Toggle split variant={activeChannelId === id ? 'secondary' : ''} id='dropdown-split-basic' />
 						<Dropdown.Menu>
 							<Dropdown.Item onClick={handleUserAction('renameChannel')} data-id={id}>
-								Переименовать
+								{t('chat.channels.actionRename')}
 							</Dropdown.Item>
 							<Dropdown.Item data-id={id} onClick={handleUserAction('removeChannel')}>
-								Удалить
+								{t('chat.channels.actionRemove')}
 							</Dropdown.Item>
 						</Dropdown.Menu>
-						<span className='visually-hidden'>Управление каналом</span>
+						<span className='visually-hidden'>{t('chat.channels.manageChannel')}</span>
 					</Dropdown>
 				</>
 			)}

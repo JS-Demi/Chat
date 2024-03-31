@@ -2,12 +2,12 @@
 import React from 'react'
 import callModal from './modals'
 
-const renderModal = (modalInfo, handleClose, setActiveChannel) => {}
-
 const PopUpLayout = ({ modalInfo, handleClose, setActiveChannel }) => {
+	// check if modal is not be called, not rendering it
 	if (!modalInfo.type) {
 		return null
 	}
+	// call modal
 	const ModalComponent = callModal(modalInfo.type)
 
 	return <ModalComponent modalInfo={modalInfo} handleClose={handleClose} setActiveChannel={setActiveChannel} />

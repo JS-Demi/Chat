@@ -1,8 +1,9 @@
 import { ErrorMessage, Field, Form, Formik } from 'formik'
 import React, { useEffect, useRef } from 'react'
 import { Modal } from 'react-bootstrap'
-import * as Yup from 'yup'
-import { useGetChannelsQuery, useRenameChannelMutation } from '../../services/channelsApi'
+import { useTranslation } from 'react-i18next'
+import { usePopUpSchema } from '../../hooks/usePopUpSchema'
+import { useGetChannelsQuery, useRenameChannelMutation } from '../../store/services/channelsApi'
 import './modals.scss'
 
 const PopUpRenameChannel = ({ modalInfo, handleClose }) => {
@@ -15,17 +16,17 @@ const PopUpRenameChannel = ({ modalInfo, handleClose }) => {
 		}
 	}, [inputRef])
 
-	// get our channels names list for our schema
+	// use hooks for i18n, rename channel, schema and data for initial state form
 	const { data: channels } = useGetChannelsQuery()
-	const channelsNames = channels.map(({ name }) => name)
+	const { t } = useTranslation()
+	const [renameChannel] = useRenameChannelMutation()
+	const schema = usePopUpSchema()
 
-	// get id of the channel to change
+	// get id of the channel to change and channel for initial state
 	const { id } = modalInfo
 	const channel = channels.find((c) => c.id === id)
-	// get renameChannel hook
-	const [renameChannel] = useRenameChannelMutation()
 
-	// submit our formik
+	// create handle submit for rename channel
 	const handleSubmit = (name) => {
 		const data = { name, id }
 		renameChannel(data)
@@ -36,18 +37,10 @@ const PopUpRenameChannel = ({ modalInfo, handleClose }) => {
 			.catch((error) => console.log(error))
 	}
 
-	const channelsSchema = Yup.object().shape({
-		name: Yup.string()
-			.min(3, 'Не менее 3 символов')
-			.max(20, 'Не более 20 символов')
-			.matches(/^\S+$/, 'Имя канала не может содержать пробелы')
-			.notOneOf(channelsNames, 'Канал с таким именем уже существует'),
-	})
-
 	return (
 		<Modal show={true} onHide={handleClose} size='lg' aria-labelledby='contained-modal-title-vcenter' centered>
 			<Modal.Header closeButton>
-				<Modal.Title id='contained-modal-title-vcenter'>Переименовать канал</Modal.Title>
+				<Modal.Title id='contained-modal-title-vcenter'>{t('popUp.rename')}</Modal.Title>
 			</Modal.Header>
 			<Modal.Body>
 				<Formik
@@ -55,24 +48,24 @@ const PopUpRenameChannel = ({ modalInfo, handleClose }) => {
 						name: channel.name,
 					}}
 					onSubmit={handleSubmit}
-					validationSchema={channelsSchema}
+					validationSchema={schema}
 				>
 					{({ errors, isSubmitting }) => {
 						return (
 							<Form>
 								<div>
 									<label id='name' className='visually-hidden' htmlFor='name'>
-										Название канала
+										{t('popUp.label')}
 									</label>
 									<Field className={`form-control ${!errors.name ? '' : 'is-invalid'}`} type='text' name='name' innerRef={inputRef} />
 									<ErrorMessage component='div' className='invalid-feedback' name='name' />
 								</div>
 								<div className='d-flex justify-content-end'>
 									<button type='button' className='btn btn-secondary' onClick={handleClose}>
-										Отменить
+										{t('popUp.cancel')}
 									</button>
 									<button type='submit' className='btn btn-primary' disabled={isSubmitting}>
-										Отправить
+										{t('popUp.rename')}
 									</button>
 								</div>
 							</Form>
