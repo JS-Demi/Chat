@@ -77,6 +77,12 @@ const ru = {
 				match: 'Канал с таким именем уже существует',
 			},
 		},
+		toastify: {
+			fetchError: 'Ошибка соединения',
+			successCreate: 'Канал создан',
+			successRename: 'Канал переименован',
+			successRemove: 'Канал удалён',
+		},
 	},
 }
 

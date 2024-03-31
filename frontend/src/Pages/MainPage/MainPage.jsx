@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import PopUpLayout from '../../Components/Modals/PopUpLayout'
+import PopUpLayout from '../../Components/PopUps/PopUpLayout'
 import Channels from './Channels/Channels'
 import MessagesForm from './Messages/MessagesForm'
 import './mainpage.scss'

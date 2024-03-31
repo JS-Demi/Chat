@@ -2,6 +2,8 @@ import { ErrorMessage, Field, Form, Formik } from 'formik'
 import React, { useEffect, useRef } from 'react'
 import { Modal } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
+import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import { usePopUpSchema } from '../../hooks/usePopUpSchema'
 import { useAddChannelMutation } from '../../store/services/channelsApi'
 import './modals.scss'
@@ -26,9 +28,16 @@ const PopUpAddChannel = ({ modalInfo, handleClose, setActiveChannel }) => {
 			.unwrap()
 			.then((res) => {
 				setActiveChannel(res)
+				toast.success(t('toastify.successCreate'))
 				handleClose()
 			})
-			.catch((error) => console.log(error))
+			.catch((error) => {
+				if (error.status === 'FETCH_ERROR') {
+					toast.error(t('toastify.fetchError'))
+				}
+				handleClose()
+				console.log(error)
+			})
 	}
 
 	return (

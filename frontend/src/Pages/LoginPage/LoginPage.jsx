@@ -2,6 +2,7 @@ import { Field, Form, Formik } from 'formik'
 import React, { useEffect, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link, useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import { useLoginMutation } from '../../store/services/authenticationApi'
 import '../SignupPage/SignupPage.scss'
 
@@ -26,7 +27,12 @@ const LoginForm = () => {
 				navigate('/')
 				// subscribe()
 			})
-			.catch((err) => console.log(`something went wrong ${err}`))
+			.catch((err) => {
+				if (err.status === 'FETCH_ERROR') {
+					toast.error(t('toastify.fetchError'))
+				}
+				console.log(err.message)
+			})
 	}
 
 	return (

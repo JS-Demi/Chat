@@ -1,6 +1,7 @@
 import React from 'react'
 import { Modal } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
+import { toast } from 'react-toastify'
 import { useRemoveChannelMutation } from '../../store/services/channelsApi'
 import './modals.scss'
 
@@ -16,11 +17,15 @@ const PopUpRemoveChannel = ({ modalInfo, handleClose, setActiveChannel }) => {
 	const handleSubmit = () => {
 		removeChannel(id)
 			.unwrap()
-			.then((res) => {
+			.then(() => {
 				setActiveChannel({ name: 'General', id: 1 })
+				toast.success(t('toastify.successRemove'))
 				handleClose()
 			})
 			.catch((error) => {
+				if (error.status === 'FETCH_ERROR') {
+					toast.error(t('toastify.fetchError'))
+				}
 				handleClose()
 				console.log(error)
 			})

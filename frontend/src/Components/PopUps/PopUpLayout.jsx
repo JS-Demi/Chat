@@ -1,6 +1,6 @@
 // import { Form } from 'formik'
 import React from 'react'
-import callModal from './modals'
+import callModal from './callModal'
 
 const PopUpLayout = ({ modalInfo, handleClose, setActiveChannel }) => {
 	// check if modal is not be called, not rendering it

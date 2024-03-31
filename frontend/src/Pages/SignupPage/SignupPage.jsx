@@ -2,6 +2,7 @@ import { Field, Form, Formik } from 'formik'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link, useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import * as Yup from 'yup'
 import { useCreateUserMutation } from '../../store/services/authenticationApi'
 import './SignupPage.scss'
@@ -44,6 +45,9 @@ const SignupPage = () => {
 				console.log(error)
 				if (error.status === 409) {
 					setConflictError(t('signup.errors.alreadyExist'))
+				}
+				if (error.status === 'FETCH_ERROR') {
+					toast.error(t('toastify.fetchError'))
 				}
 			})
 	}

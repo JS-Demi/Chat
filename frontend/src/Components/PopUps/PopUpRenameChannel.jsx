@@ -2,6 +2,7 @@ import { ErrorMessage, Field, Form, Formik } from 'formik'
 import React, { useEffect, useRef } from 'react'
 import { Modal } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
+import { toast } from 'react-toastify'
 import { usePopUpSchema } from '../../hooks/usePopUpSchema'
 import { useGetChannelsQuery, useRenameChannelMutation } from '../../store/services/channelsApi'
 import './modals.scss'
@@ -31,10 +32,17 @@ const PopUpRenameChannel = ({ modalInfo, handleClose }) => {
 		const data = { name, id }
 		renameChannel(data)
 			.unwrap()
-			.then((res) => {
+			.then(() => {
+				toast.success(t('toastify.successRename'))
 				handleClose()
 			})
-			.catch((error) => console.log(error))
+			.catch((error) => {
+				if (error.status === 'FETCH_ERROR') {
+					toast.error(t('toastify.fetchError'))
+				}
+				handleClose()
+				console.log(error)
+			})
 	}
 
 	return (
