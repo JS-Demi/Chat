@@ -26,13 +26,15 @@ const PopUpRenameChannel = ({ modalInfo, handleClose }) => {
 	// get id of the channel to change and channel for initial state
 	const { id } = modalInfo
 	const channel = channels.find((c) => c.id === id)
-
+	const token = localStorage.getItem('access_token')
 	// create handle submit for rename channel
-	const handleSubmit = (name) => {
+	const handleSubmit = ({ name }) => {
+		// filter bad words
+		// const filtered = filter.clean(name, '*', 0)
 		const data = { name, id }
 		renameChannel(data)
 			.unwrap()
-			.then(() => {
+			.then((res) => {
 				toast.success(t('toastify.successRename'))
 				handleClose()
 			})

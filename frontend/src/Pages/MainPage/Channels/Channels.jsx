@@ -9,7 +9,6 @@ const Channels = ({ handleUserAction, activeChannel, setActiveChannel }) => {
 	// use hooks for i18n and channels data
 	const { t } = useTranslation()
 	const { data: channels } = useGetChannelsQuery()
-
 	// get if of active channel from state
 	const { id: activeChannelId } = activeChannel
 

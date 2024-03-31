@@ -30,6 +30,8 @@ export const api = createApi({
 					})
 					socket.on('renameChannel', (channel) => {
 						updateCachedData((draft) => {
+							console.log(channel)
+							console.log(draft)
 							return draft.map((c) => (c.id === channel.id ? channel : c))
 						})
 					})
@@ -38,9 +40,7 @@ export const api = createApi({
 							return draft.filter((c) => c.id !== id)
 						})
 					})
-				} catch {
-					console.log('oh, its error')
-				}
+				} catch {}
 				await cacheEntryRemoved
 				socket.off('newChannel')
 				socket.off('renameChannel')
@@ -55,10 +55,10 @@ export const api = createApi({
 			}),
 		}),
 		renameChannel: builder.mutation({
-			query: ({ name, id }) => ({
-				url: id,
+			query: (body) => ({
+				url: body.id,
 				method: 'PATCH',
-				body: name,
+				body: body.name,
 			}),
 		}),
 		removeChannel: builder.mutation({

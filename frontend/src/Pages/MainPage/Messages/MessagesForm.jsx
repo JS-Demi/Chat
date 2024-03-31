@@ -1,4 +1,5 @@
 import { Field, Form, Formik } from 'formik'
+import * as filter from 'leo-profanity'
 import React, { useEffect, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useGetMessagesQuery, useSendMessageMutation } from '../../../store/services/messagesApi'
@@ -25,9 +26,11 @@ const Messages = ({ activeChannel }) => {
 	const count = messages ? messages.filter((msg) => msg.channelId === activeChannelId).length : 0
 
 	// create handle submit for send message
-	const handleSendMessage = ({ body }, { resetForm }) => {
+	const handleSendMessage = ({ body }) => {
+		// filter bad words
+		const filtered = filter.clean(body, '*', 0)
 		// create message for our api
-		const message = { body, channelId: activeChannelId, username }
+		const message = { body: filtered, channelId: activeChannelId, username }
 		sendMessage(message)
 			.unwrap()
 			.then(() => {})

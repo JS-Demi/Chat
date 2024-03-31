@@ -1,10 +1,12 @@
+import React from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.scss'
 import Init from './init'
 import reportWebVitals from './reportWebVitals'
 
-const root = ReactDOM.createRoot(document.getElementById('chat'))
-root.render(await Init())
+const root = ReactDOM.createRoot(document.getElementById('app'))
+const vdom = await Init()
+root.render(<React.StrictMode>{vdom}</React.StrictMode>)
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

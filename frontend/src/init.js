@@ -1,6 +1,7 @@
 import i18next from 'i18next'
+import * as filter from 'leo-profanity'
 import React from 'react'
-import { initReactI18next } from 'react-i18next'
+import { I18nextProvider, initReactI18next } from 'react-i18next'
 import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
 import App from './Components/App/App'
@@ -8,27 +9,28 @@ import resources from './locales'
 import { store } from './store/store'
 
 const Init = async () => {
+	// init leo dictionary for ru language
+	filter.add(filter.getDictionary('ru'))
+	// create i18next instance
+	const i18n = i18next.createInstance()
+	// init i18next
 	try {
-		i18next.use(initReactI18next).init({
+		await i18n.use(initReactI18next).init({
 			fallbackLng: 'ru',
 			resources,
-			interpolation: {
-				escapeValue: false,
-			},
 		})
 	} catch (err) {
-		console.log('Ошибка инициализации i18next')
-		console.log(err)
+		console.log(`${err} i18next`)
 	}
 
 	return (
-		<React.StrictMode>
-			<Provider store={store}>
+		<Provider store={store}>
+			<I18nextProvider i18n={i18n}>
 				<BrowserRouter>
 					<App />
 				</BrowserRouter>
-			</Provider>
-		</React.StrictMode>
+			</I18nextProvider>
+		</Provider>
 	)
 }
 

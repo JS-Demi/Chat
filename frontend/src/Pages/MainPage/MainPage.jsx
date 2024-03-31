@@ -9,7 +9,6 @@ const MainPage = () => {
 	// create state
 	const [modalInfo, setModalInfo] = useState({ type: null, id: null })
 	const [activeChannel, setActiveChannel] = useState({ id: 1, name: 'General' })
-
 	// use hook for i18n
 	const { t } = useTranslation()
 

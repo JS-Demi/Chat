@@ -24,18 +24,9 @@ const RoutesList = () => {
 						</PrivateRoute>
 					}
 				/>
-				<Route
-					path='/login'
-					element={<LoginPage />}
-				/>
-				<Route
-					path='/signup'
-					element={<SignupPage />}
-				/>
-				<Route
-					path='*'
-					element={<ErrorPage />}
-				/>
+				<Route path='/login' element={<LoginPage />} />
+				<Route path='/signup' element={<SignupPage />} />
+				<Route path='*' element={<ErrorPage />} />
 			</Routes>
 		</>
 	)

@@ -1,4 +1,5 @@
 import { ErrorMessage, Field, Form, Formik } from 'formik'
+import * as filter from 'leo-profanity'
 import React, { useEffect, useRef } from 'react'
 import { Modal } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
@@ -23,8 +24,10 @@ const PopUpAddChannel = ({ modalInfo, handleClose, setActiveChannel }) => {
 	const schema = usePopUpSchema()
 
 	// create submit handle for add channel
-	const handleSubmit = (name) => {
-		addChannel(name)
+	const handleSubmit = ({ name }) => {
+		// filter bad words
+		const filtered = filter.clean(name, '*', 0)
+		addChannel({ name: filtered })
 			.unwrap()
 			.then((res) => {
 				setActiveChannel(res)
