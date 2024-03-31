@@ -2,20 +2,19 @@ import { ErrorBoundary, Provider } from '@rollbar/react'
 import React from 'react'
 
 const rollbarConfig = {
-	accessToken: process.env.REACT_APP_ROLLBAR_ACCESS_TOKEN,
+	accessToken: 'af2fc603bef64d0f8b26c3c052c539ed',
 	environment: 'testenv',
-	captureUncaught: true,
-	captureUnhandledRejections: true,
 }
 
+function TestError() {
+	const a = null
+	return a.hello()
+}
 export default function RollbarProvider({ children }) {
 	return (
 		<Provider config={rollbarConfig}>
-			<ErrorBoundary
-				level='critical'
-				errorMessage='example error boundary message'
-				fallbackUI={() => <p style={{ color: 'red' }}>Oops, there was an error.</p>}
-			>
+			<ErrorBoundary>
+				<TestError />
 				{children}
 			</ErrorBoundary>
 		</Provider>
