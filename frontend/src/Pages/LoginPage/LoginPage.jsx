@@ -3,8 +3,9 @@ import React, { useEffect, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
+import logo from '../../Assets/avatar.jpg'
 import { useLoginMutation } from '../../store/services/authenticationApi'
-import '../SignupPage/SignupPage.scss'
+import './login.scss'
 
 const LoginForm = () => {
 	const navigate = useNavigate()
@@ -37,53 +38,52 @@ const LoginForm = () => {
 
 	return (
 		<>
-			<div className='auth_box'>
-				<div className='wrapper'>
+			<div className='log'>
+				<div className='log__wrapper'>
 					<div>
-						<img src='/frontend/src/Assets/avatar1.jpg' className='img img__circle' alt={t('login.header')} />
+						<img src={logo} className='img img__circle' alt={t('login.header')} />
 					</div>
-					<h1 className='title'>{t('login.header')}</h1>
+
 					<Formik initialValues={{ username: '', password: '' }} onSubmit={handleLogin}>
 						{() => {
 							return (
 								<Form>
-									<div className='form-group'>
-										<label className='visually-hidden' htmlFor='username'>
-											{t('login.loginLabel')}
-										</label>
+									<h1 className='title'>{t('login.header')}</h1>
+									<div className='form-floating mb-3'>
 										<Field
 											type='text'
 											name='username'
 											autoComplete='username'
-											placeholder={t('login.loginPlaceholder')}
+											placeholder={t('login.login')}
 											innerRef={usernameInputRef}
-											className={isError ? 'form-control is-invalid' : 'form-control'}
+											className={`form-control log__wrapper__input ${isError ? 'is-invalid' : ''}`}
 										/>
+										<label htmlFor='username'>{t('login.login')}</label>
 									</div>
-									<div className='form-group'>
-										<label className='visually-hidden' htmlFor='password'>
-											{t('login.passwordLabel')}
-										</label>
+									<div className='form-floating mb-3'>
 										<Field
-											placeholder={t('login.passwordPlaceholder')}
+											placeholder={t('login.password')}
 											type='password'
 											name='password'
 											autoComplete='current-password'
-											className={isError ? 'form-control is-invalid' : 'form-control'}
+											className={`form-control log__wrapper__input ${isError ? 'is-invalid' : ''}`}
 										/>
+										<label htmlFor='password'>{t('login.password')}</label>
 										{isError && <div className='invalid-response'> {t('login.errors.wrongData')}</div>}
 									</div>
 									<button type='submit' className='btn btn-primary'>
 										{t('login.submit')}
 									</button>
-									<p>
-										{t('login.footer.text')}
-										<Link to='/signup'> {t('login.footer.link')}</Link>
-									</p>
 								</Form>
 							)
 						}}
 					</Formik>
+					<div className='log__wrapper__footer'>
+						<div className='text-center'>
+							<span>{t('login.footer.text')}</span>
+							<Link to='/signup'> {t('login.footer.link')}</Link>
+						</div>
+					</div>
 				</div>
 			</div>
 		</>

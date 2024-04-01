@@ -1,24 +1,18 @@
-import { ErrorBoundary, Provider } from '@rollbar/react' // Provider imports 'rollbar'
+import { ErrorBoundary, Provider } from '@rollbar/react'
 import React from 'react'
 
 const rollbarConfig = {
-	accessToken: 'aa1ce215c62e4caa9d16889c42a67a82',
-	environment: 'testenv',
+	accessToken: process.env.REACT_APP_ROLLBAR_ACCESS_TOKEN,
+	environment: process.env.REACT_APP_ENV_MODE,
 }
-
-function TestError() {
-	const a = null
-	return a.hello()
-}
-
-// Provider instantiates Rollbar client instance handling any uncaught errors or unhandled promises in the browser
-// ErrorBoundary catches all React errors in the tree below and logs them to Rollbar
-export default function App() {
-	return (
+export default function RollbarProvider({ children }) {
+	// check our environment
+	const isDev = process.env.NODE_ENV === 'development'
+	return isDev ? (
+		children
+	) : (
 		<Provider config={rollbarConfig}>
-			<ErrorBoundary>
-				<TestError />
-			</ErrorBoundary>
+			<ErrorBoundary>{children}</ErrorBoundary>
 		</Provider>
 	)
 }

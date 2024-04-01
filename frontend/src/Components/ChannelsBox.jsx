@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button'
 import ButtonGroup from 'react-bootstrap/ButtonGroup'
 import Dropdown from 'react-bootstrap/Dropdown'
 import { useTranslation } from 'react-i18next'
-import { useGetChannelsQuery } from '../../../store/services/channelsApi'
+import { useGetChannelsQuery } from '../store/services/channelsApi'
 
 const Channels = ({ handleUserAction, activeChannel, setActiveChannel }) => {
 	// use hooks for i18n and channels data
@@ -37,12 +37,12 @@ const Channels = ({ handleUserAction, activeChannel, setActiveChannel }) => {
 							onClick={handleSetActiveChannel}
 							id={id}
 							name={name}
-							className='w-100 rounded-0 text-start text-truncate'
+							className='w-100 rounded-0 text-start text-truncate over-text'
 							variant={activeChannelId === id ? 'secondary' : ''}
 						>
 							<span className='me-1'>#</span> {name}
 						</Button>
-						<Dropdown.Toggle split variant={activeChannelId === id ? 'secondary' : ''} id='dropdown-split-basic' />
+						<Dropdown.Toggle split className='flex-grow-0' variant={activeChannelId === id ? 'secondary' : ''} id='dropdown-split-basic' />
 						<Dropdown.Menu>
 							<Dropdown.Item onClick={handleUserAction('renameChannel')} data-id={id}>
 								{t('chat.channels.actionRename')}

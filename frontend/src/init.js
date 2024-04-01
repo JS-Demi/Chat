@@ -6,6 +6,7 @@ import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
 import App from './Components/App/App'
 import resources from './locales'
+import RollbarProvider from './rollbar'
 import { store } from './store/store'
 
 const Init = async () => {
@@ -27,9 +28,9 @@ const Init = async () => {
 		<Provider store={store}>
 			<I18nextProvider i18n={i18n}>
 				<BrowserRouter>
-					{/* <RollbarProvider> */}
-					<App />
-					{/* </RollbarProvider> */}
+					<RollbarProvider>
+						<App />
+					</RollbarProvider>
 				</BrowserRouter>
 			</I18nextProvider>
 		</Provider>

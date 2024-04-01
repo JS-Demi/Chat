@@ -1,0 +1,104 @@
+dropdown-menu {
+	transform: scale(0);
+	transform: 0.4s;
+	show {
+		transform: scale(1);
+	}
+}
+
+.chat {
+	border-radius: 10px;
+	background-color: white;
+	margin-right: calc(-1 * (100vw - 100%));
+	width: 90%;
+	height: 85%;
+	margin: auto;
+	margin-top: 30px;
+	box-shadow: 0px 0.5rem 1rem #00000026;
+	margin-bottom: 30px;
+	border: 1px solid #ccc;
+	// border-radius: 10px;
+	display: grid;
+	grid-template-columns: minmax(100px, 180px) minmax(600px, 1fr);
+	grid-template-rows: 100px 1fr;
+	grid-template-areas:
+		'aside header'
+		'aside main';
+
+	&__channels {
+		background-color: rgb(248, 249, 250, 1);
+		height: 100%;
+		padding-bottom: 10px;
+		grid-area: aside;
+		border-right: 1px solid #ccc;
+		display: grid;
+		grid-template-rows: 80px 1fr;
+		&__header {
+			border-top-right-radius: 10px;
+			display: grid;
+			align-items: center;
+			text-align: center;
+			grid-template-columns: 1fr 50px;
+			width: 100%;
+			height: 100%;
+			b {
+				font-size: 19px;
+				text-align: center;
+			}
+			button {
+				color: rgb(30, 144, 255);
+				padding-left: 15px;
+				padding-top: 10px;
+				&:hover {
+					color: rgb(0, 0, 205);
+				}
+			}
+		}
+		&__main {
+			margin-right: 10px;
+			overflow-y: auto;
+		}
+	}
+	&__messages {
+		grid-area: main;
+		background-color: white;
+		box-shadow: 1px -1px 2px #ccc;
+		display: grid;
+		grid-template-rows: 1fr 75px;
+		padding-top: 20px;
+		overflow: auto !important;
+
+		input:focus-within {
+			outline: none !important;
+			border: none !important;
+		}
+		&__header {
+			width: 100%;
+			height: 100%;
+			background-color: rgb(248, 249, 250, 1);
+			display: grid;
+			grid-area: header;
+			align-items: center;
+			align-self: center;
+			padding-left: 1em;
+		}
+	}
+	@media (max-width: 1200px) {
+		width: 1000px;
+	}
+	@media (max-width: 1000px) {
+		width: 768px;
+		grid-template-columns: 130px 1fr;
+		&__channels b {
+			padding-left: 10px;
+		}
+	}
+	@media (max-width: 768px) {
+		width: 560px;
+		grid-template-columns: 180px 1fr;
+	}
+}
+
+.enter-icon {
+	color: rgb(100, 149, 237);
+}

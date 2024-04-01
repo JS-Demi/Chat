@@ -2,7 +2,7 @@ import { Field, Form, Formik } from 'formik'
 import * as filter from 'leo-profanity'
 import React, { useEffect, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useGetMessagesQuery, useSendMessageMutation } from '../../../store/services/messagesApi'
+import { useGetMessagesQuery, useSendMessageMutation } from '../store/services/messagesApi'
 
 const Messages = ({ activeChannel }) => {
 	// create ref for input and focused input
@@ -23,7 +23,6 @@ const Messages = ({ activeChannel }) => {
 	// get id of active channel
 	const { id: activeChannelId, name } = activeChannel
 	// get count of messages in channel
-	const count = messages ? messages.filter((msg) => msg.channelId === activeChannelId).length : 0
 
 	// create handle submit for send message
 	const handleSendMessage = ({ body }) => {
@@ -39,14 +38,7 @@ const Messages = ({ activeChannel }) => {
 
 	return (
 		<>
-			<div className='bg-light mb-4 p-3 shadow-sm small'>
-				<p className='m-0'>
-					<b># {name}</b>
-				</p>
-				<span className='text-muted'>{t('chat.messages.count', { count })}</span>
-			</div>
-
-			<div id='messages-box' className='chat-messages overflow-auto px-5 '>
+			<div id='messages-box' className='chat__messages__box overflow-auto px-5 '>
 				{messages?.map(({ username, body, channelId, id }) => {
 					return (
 						activeChannelId === channelId && (
@@ -57,7 +49,7 @@ const Messages = ({ activeChannel }) => {
 					)
 				})}
 			</div>
-			<div className='mt-auto px-5 py-3'>
+			<div className='chat__messages__form mt-auto px-5 py-3'>
 				<Formik initialValues={{ body: '' }} onSubmit={handleSendMessage}>
 					{({ values }) => {
 						const isDisabled = !values.body
@@ -73,11 +65,12 @@ const Messages = ({ activeChannel }) => {
 										placeholder={t('chat.messages.placeholder')}
 									/>
 									<button disabled={isDisabled} type='submit' className='btn btn-group-vertical'>
-										<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 0 16' width='20' height='20' fill='currentColor'>
+										<svg className='enter-icon' width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'>
+											<path d='M20 5H8V9H6V3H22V21H6V15H8V19H20V5Z' fill='currentColor' />
 											<path
-												fillRule='evenodd'
-												d='M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm4.5 5.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z'
-											></path>
+												d='M13.0743 16.9498L11.6601 15.5356L14.1957 13H2V11H14.1956L11.6601 8.46451L13.0743 7.05029L18.024 12L13.0743 16.9498Z'
+												fill='currentColor'
+											/>
 										</svg>
 										<span className='visually-hidden'>{t('chat.messages.sendMessage')}</span>
 									</button>
