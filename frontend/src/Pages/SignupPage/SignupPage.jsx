@@ -1,4 +1,4 @@
-import { Field, Form, Formik } from 'formik'
+import { ErrorMessage, Field, Form, Formik } from 'formik'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
@@ -61,7 +61,7 @@ const SignupPage = () => {
 						validationSchema={signupSchema}
 						onSubmit={handleSubmit}
 					>
-						{({ errors, touched, values }) => {
+						{({ errors, touched }) => {
 							return (
 								<Form>
 									<h1 className='title'>{t('signup.header')}</h1>
@@ -75,7 +75,7 @@ const SignupPage = () => {
 											autoComplete='username'
 										/>
 										<label htmlFor='username'>{t('signup.login')}</label>
-										{touched.username && errors.username && <div className='login-error'>{errors.username}</div>}
+										<ErrorMessage component='div' className='invalid' name='username' />
 									</div>
 									<div className='form-floating'>
 										<Field
@@ -87,7 +87,7 @@ const SignupPage = () => {
 											autoComplete='off'
 										/>
 										<label htmlFor='password'>{t('signup.password')}</label>
-										{touched.password && errors.password && <div className='login-error'>{errors.password}</div>}
+										<ErrorMessage component='div' className='invalid' name='password' />
 									</div>
 									<div className='form-floating'>
 										<Field
@@ -101,9 +101,7 @@ const SignupPage = () => {
 											autoComplete='off'
 										/>
 										<label htmlFor='username'>{t('signup.confirmPassword')}</label>
-										{touched.confirmPassword && errors.confirmPassword && values.password && (
-											<div className='login-error'>{errors.confirmPassword}</div>
-										)}
+										<ErrorMessage component='div' className='invalid' name='confirmPassword' />
 										{conflictError && <div className='invalid'>{conflictError}</div>}
 									</div>
 									<button type='submit' className='btn btn-primary'>

@@ -55,6 +55,8 @@ const PopUpAddChannel = ({ modalInfo, handleClose, setActiveChannel }) => {
 					}}
 					onSubmit={handleSubmit}
 					validationSchema={schema}
+					validateOnChange={false}
+					validateOnBlur={false}
 				>
 					{({ errors, isSubmitting }) => {
 						return (
