@@ -9,7 +9,7 @@ import './chat.scss'
 const MainPage = () => {
 	// create state
 	const [modalInfo, setModalInfo] = useState({ type: null, id: null })
-	const [activeChannel, setActiveChannel] = useState({ id: '1', name: 'General' })
+	const [activeChannel, setActiveChannel] = useState({ id: '1', name: 'general' })
 	// use hook for i18n
 	const { t } = useTranslation()
 	const { data: messages } = useGetMessagesQuery()

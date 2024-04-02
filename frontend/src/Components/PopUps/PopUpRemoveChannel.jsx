@@ -18,7 +18,7 @@ const PopUpRemoveChannel = ({ modalInfo, handleClose, setActiveChannel, activeCh
 			.unwrap()
 			.then(() => {
 				if (activeChannelId === id) {
-					setActiveChannel({ name: 'General', id: '1' })
+					setActiveChannel({ name: 'general', id: '1' })
 				}
 				toast.success(t('toastify.successRemove'))
 				handleClose()
