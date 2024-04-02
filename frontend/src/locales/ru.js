@@ -45,7 +45,7 @@ const ru = {
 				count_one: '{{ count }} сообщение',
 				count_few: '{{ count }} сообщения',
 				count_many: '{{ count }} сообщений',
-				count_zero: 'Нет сообщений',
+				count_zero: '0 сообщений',
 				label: 'Новое сообщение',
 				placeholder: 'Введите сообщение...',
 				sendMessage: 'Отправить',
