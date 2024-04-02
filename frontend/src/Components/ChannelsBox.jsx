@@ -23,7 +23,6 @@ const Channels = ({ handleUserAction, activeChannel, setActiveChannel }) => {
 				<Button
 					onClick={handleSetActiveChannel}
 					id={id}
-					name={name}
 					className='channel w-100 rounded-0 text-start'
 					variant={activeChannelId === id ? 'secondary' : ''}
 				>
@@ -35,7 +34,6 @@ const Channels = ({ handleUserAction, activeChannel, setActiveChannel }) => {
 					<Button
 						onClick={handleSetActiveChannel}
 						id={id}
-						name={name}
 						className='channel w-100 rounded-0 text-start text-truncate over-text'
 						variant={activeChannelId === id ? 'secondary' : ''}
 					>
