@@ -35,7 +35,7 @@ const PopUpRenameChannel = ({ modalInfo, handleClose }) => {
 		const data = { body: filtered, id }
 		renameChannel(data)
 			.unwrap()
-			.then((res) => {
+			.then(() => {
 				toast.success(t('toastify.successRename'))
 				handleClose()
 			})
@@ -49,7 +49,7 @@ const PopUpRenameChannel = ({ modalInfo, handleClose }) => {
 	}
 
 	return (
-		<Modal show={true} onHide={handleClose} size='lg' aria-labelledby='contained-modal-title-vcenter' centered>
+		<Modal show onHide={handleClose} size='lg' aria-labelledby='contained-modal-title-vcenter' centered>
 			<Modal.Header closeButton>
 				<Modal.Title id='contained-modal-title-vcenter'>{t('popUp.rename')}</Modal.Title>
 			</Modal.Header>
@@ -63,27 +63,25 @@ const PopUpRenameChannel = ({ modalInfo, handleClose }) => {
 					validateOnChange={false}
 					validateOnBlur={false}
 				>
-					{({ errors, isSubmitting }) => {
-						return (
-							<Form>
-								<div>
-									<label id='name' className='visually-hidden' htmlFor='name'>
-										{t('popUp.label')}
-									</label>
-									<Field className={`form-control ${!errors.name ? '' : 'is-invalid'}`} type='text' name='name' innerRef={inputRef} />
-									<ErrorMessage component='div' className='invalid-feedback' name='name' />
-								</div>
-								<div className='d-flex justify-content-end'>
-									<button type='button' className='btn btn-secondary' onClick={handleClose}>
-										{t('popUp.cancel')}
-									</button>
-									<button type='submit' className='btn btn-primary' disabled={isSubmitting}>
-										{t('popUp.rename')}
-									</button>
-								</div>
-							</Form>
-						)
-					}}
+					{({ errors, isSubmitting }) => (
+						<Form>
+							<div>
+								<label id='name' className='visually-hidden' htmlFor='name'>
+									{t('popUp.label')}
+								</label>
+								<Field className={`form-control ${!errors.name ? '' : 'is-invalid'}`} type='text' name='name' innerRef={inputRef} />
+								<ErrorMessage component='div' className='invalid-feedback' name='name' />
+							</div>
+							<div className='d-flex justify-content-end'>
+								<button type='button' className='btn btn-secondary' onClick={handleClose}>
+									{t('popUp.cancel')}
+								</button>
+								<button type='submit' className='btn btn-primary' disabled={isSubmitting}>
+									{t('popUp.rename')}
+								</button>
+							</div>
+						</Form>
+					)}
 				</Formik>
 			</Modal.Body>
 		</Modal>

@@ -36,11 +36,11 @@ export const api = createApi({
 						})
 					})
 					socket.on('removeChannel', ({ id }) => {
-						updateCachedData((draft) => {
-							return draft.filter((c) => c.id !== id)
-						})
+						updateCachedData((draft) => draft.filter((c) => c.id !== id))
 					})
-				} catch {}
+				} catch {
+					console.log('response error')
+				}
 				await cacheEntryRemoved
 				socket.off('newChannel')
 				socket.off('renameChannel')
@@ -65,10 +65,7 @@ export const api = createApi({
 			query: (id) => ({
 				url: id,
 				method: 'DELETE',
-				invalidatesTags: (result, error, id) => {
-					console.log(result, id)
-					return [{ type: 'Message', id }]
-				},
+				invalidatesTags: (channelId) => [{ type: 'Message', channelId }],
 			}),
 		}),
 	}),

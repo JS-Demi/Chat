@@ -18,7 +18,7 @@ const Layout = () => {
 		<>
 			<nav className='shadow-sm navbar navbar-expand-lg navbar-light bg-white'>
 				<div className='container'>
-					<Link to={'/'} className='navbar-brand'>
+					<Link to='/' className='navbar-brand'>
 						Hexlet Chat
 					</Link>
 					{!!isLoggedIn && (

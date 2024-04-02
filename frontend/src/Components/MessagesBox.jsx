@@ -19,9 +19,9 @@ const Messages = ({ activeChannel }) => {
 	const [sendMessage] = useSendMessageMutation()
 
 	// get username
-	const username = localStorage.getItem('user')
+	const user = localStorage.getItem('user')
 	// get id of active channel
-	const { id: activeChannelId, name } = activeChannel
+	const { id: activeChannelId } = activeChannel
 	// get count of messages in channel
 
 	// create handle submit for send message
@@ -29,7 +29,7 @@ const Messages = ({ activeChannel }) => {
 		// filter bad words
 		const filtered = filter.clean(body, '*', 0)
 		// create message for our api
-		const message = { body: filtered, channelId: activeChannelId, username }
+		const message = { body: filtered, channelId: activeChannelId, username: user }
 		sendMessage(message)
 			.unwrap()
 			.then(() => {
@@ -41,15 +41,14 @@ const Messages = ({ activeChannel }) => {
 	return (
 		<>
 			<div id='messages-box' className='chat__messages__box overflow-auto px-5 '>
-				{messages?.map(({ username, body, channelId, id }) => {
-					return (
+				{messages?.map(
+					({ username, body, channelId, id }) =>
 						activeChannelId === channelId && (
 							<div key={id} className='text-break mb-2'>
 								<b>{username}</b>: {body}
 							</div>
 						)
-					)
-				})}
+				)}
 			</div>
 			<div className='chat__messages__form mt-auto px-5 py-3'>
 				<Formik initialValues={{ body: '' }} onSubmit={handleSendMessage}>

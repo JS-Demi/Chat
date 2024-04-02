@@ -16,7 +16,7 @@ export const api = createApi({
 	endpoints: (builder) => ({
 		getMessages: builder.query({
 			query: () => '',
-			providesTags: (result, error, arg) =>
+			providesTags: (result) =>
 				result ? [...result.map(({ channelId }) => ({ type: 'Message', id: channelId })), 'Message'] : ['Message'],
 			async onCacheEntryAdded(arg, { updateCachedData, cacheDataLoaded, cacheEntryRemoved }) {
 				const socket = io()

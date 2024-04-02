@@ -27,32 +27,32 @@ const Channels = ({ handleUserAction, activeChannel, setActiveChannel }) => {
 					className='channel w-100 rounded-0 text-start'
 					variant={activeChannelId === id ? 'secondary' : ''}
 				>
-					<span className='me-1'># {name}</span>
+					<span className='me-1'># </span>
+					{name}
 				</Button>
 			) : (
-				<>
-					<Dropdown as={ButtonGroup} className='d-flex'>
-						<Button
-							onClick={handleSetActiveChannel}
-							id={id}
-							name={name}
-							className='channel w-100 rounded-0 text-start text-truncate over-text'
-							variant={activeChannelId === id ? 'secondary' : ''}
-						>
-							<span className='me-1'>#</span> {name}
-						</Button>
-						<Dropdown.Toggle split className='flex-grow-0' variant={activeChannelId === id ? 'secondary' : ''} id='dropdown-split-basic' />
-						<Dropdown.Menu>
-							<Dropdown.Item onClick={handleUserAction('renameChannel')} data-id={id}>
-								{t('chat.channels.actionRename')}
-							</Dropdown.Item>
-							<Dropdown.Item data-id={id} onClick={handleUserAction('removeChannel')}>
-								{t('chat.channels.actionRemove')}
-							</Dropdown.Item>
-						</Dropdown.Menu>
-						<span className='visually-hidden'>{t('chat.channels.manageChannel')}</span>
-					</Dropdown>
-				</>
+				<Dropdown as={ButtonGroup} className='d-flex'>
+					<Button
+						onClick={handleSetActiveChannel}
+						id={id}
+						name={name}
+						className='channel w-100 rounded-0 text-start text-truncate over-text'
+						variant={activeChannelId === id ? 'secondary' : ''}
+					>
+						<span className='me-1'>#</span>
+						{name}
+					</Button>
+					<Dropdown.Toggle split className='flex-grow-0' variant={activeChannelId === id ? 'secondary' : ''} id='dropdown-split-basic' />
+					<Dropdown.Menu>
+						<Dropdown.Item onClick={handleUserAction('renameChannel')} data-id={id}>
+							{t('chat.channels.actionRename')}
+						</Dropdown.Item>
+						<Dropdown.Item data-id={id} onClick={handleUserAction('removeChannel')}>
+							{t('chat.channels.actionRemove')}
+						</Dropdown.Item>
+					</Dropdown.Menu>
+					<span className='visually-hidden'>{t('chat.channels.manageChannel')}</span>
+				</Dropdown>
 			)}
 		</li>
 	))

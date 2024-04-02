@@ -9,7 +9,7 @@ import { usePopUpSchema } from '../../hooks/usePopUpSchema'
 import { useAddChannelMutation } from '../../store/services/channelsApi'
 import './modals.scss'
 
-const PopUpAddChannel = ({ modalInfo, handleClose, setActiveChannel }) => {
+const PopUpAddChannel = ({ handleClose, setActiveChannel }) => {
 	// create ref for focus
 	const inputRef = useRef()
 	useEffect(() => {
@@ -44,7 +44,7 @@ const PopUpAddChannel = ({ modalInfo, handleClose, setActiveChannel }) => {
 	}
 
 	return (
-		<Modal show={true} onHide={handleClose} size='lg' aria-labelledby='contained-modal-title-vcenter' centered>
+		<Modal show onHide={handleClose} size='lg' aria-labelledby='contained-modal-title-vcenter' centered>
 			<Modal.Header closeButton>
 				<Modal.Title id='contained-modal-title-vcenter'>{t('popUp.addChannel')}</Modal.Title>
 			</Modal.Header>
@@ -58,27 +58,25 @@ const PopUpAddChannel = ({ modalInfo, handleClose, setActiveChannel }) => {
 					validateOnChange={false}
 					validateOnBlur={false}
 				>
-					{({ errors, isSubmitting }) => {
-						return (
-							<Form>
-								<div>
-									<label id='name' className='visually-hidden' htmlFor='name'>
-										{t('popUp.label')}
-									</label>
-									<Field className={`form-control ${!errors.name ? '' : 'is-invalid'}`} type='text' name='name' innerRef={inputRef} />
-									<ErrorMessage component='div' className='invalid-feedback' name='name' />
-								</div>
-								<div className='d-flex justify-content-end'>
-									<button type='button' className='btn btn-secondary' onClick={handleClose}>
-										{t('popUp.cancel')}
-									</button>
-									<button type='submit' className='btn btn-primary' disabled={isSubmitting}>
-										{t('popUp.add')}
-									</button>
-								</div>
-							</Form>
-						)
-					}}
+					{({ errors, isSubmitting }) => (
+						<Form>
+							<div>
+								<label id='name' className='visually-hidden' htmlFor='name'>
+									{t('popUp.label')}
+								</label>
+								<Field className={`form-control ${!errors.name ? '' : 'is-invalid'}`} type='text' name='name' innerRef={inputRef} />
+								<ErrorMessage component='div' className='invalid-feedback' name='name' />
+							</div>
+							<div className='d-flex justify-content-end'>
+								<button type='button' className='btn btn-secondary' onClick={handleClose}>
+									{t('popUp.cancel')}
+								</button>
+								<button type='submit' className='btn btn-primary' disabled={isSubmitting}>
+									{t('popUp.add')}
+								</button>
+							</div>
+						</Form>
+					)}
 				</Formik>
 			</Modal.Body>
 		</Modal>

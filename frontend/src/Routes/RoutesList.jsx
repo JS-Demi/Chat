@@ -12,24 +12,20 @@ const PrivateRoute = ({ children }) => {
 	return access ? children : <Navigate to='/login' />
 }
 
-const RoutesList = () => {
-	return (
-		<>
-			<Routes>
-				<Route
-					path='/'
-					element={
-						<PrivateRoute>
-							<Chat />
-						</PrivateRoute>
-					}
-				/>
-				<Route path='/login' element={<LoginPage />} />
-				<Route path='/signup' element={<SignupPage />} />
-				<Route path='*' element={<ErrorPage />} />
-			</Routes>
-		</>
-	)
-}
+const RoutesList = () => (
+	<Routes>
+		<Route
+			path='/'
+			element={
+				<PrivateRoute>
+					<Chat />
+				</PrivateRoute>
+			}
+		/>
+		<Route path='/login' element={<LoginPage />} />
+		<Route path='/signup' element={<SignupPage />} />
+		<Route path='*' element={<ErrorPage />} />
+	</Routes>
+)
 
 export default RoutesList

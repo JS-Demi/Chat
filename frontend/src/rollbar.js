@@ -5,7 +5,7 @@ const rollbarConfig = {
 	accessToken: process.env.REACT_APP_ROLLBAR_ACCESS_TOKEN,
 	environment: process.env.REACT_APP_ENV_MODE,
 }
-export default function RollbarProvider({ children }) {
+const RollbarProvider = ({ children }) => {
 	// check our environment
 	const isDev = process.env.NODE_ENV === 'development'
 	return isDev ? (
@@ -16,3 +16,5 @@ export default function RollbarProvider({ children }) {
 		</Provider>
 	)
 }
+
+export default RollbarProvider

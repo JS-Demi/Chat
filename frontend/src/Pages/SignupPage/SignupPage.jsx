@@ -50,70 +50,60 @@ const SignupPage = () => {
 	}
 
 	return (
-		<>
-			<div className='reg'>
-				<div className='reg__wrapper'>
-					<div>
-						<img src={logo} className='img img__circle' alt={t('signup.header')} />
-					</div>
-					<Formik
-						initialValues={{ username: '', password: '', confirmPassword: '' }}
-						validationSchema={signupSchema}
-						onSubmit={handleSubmit}
-					>
-						{({ errors, touched }) => {
-							return (
-								<Form>
-									<h1 className='title'>{t('signup.header')}</h1>
-									<div className='form-floating mb-3'>
-										<Field
-											type='text'
-											className={`form-control reg__wrapper__input ${errors.username && touched.username ? 'is-invalid' : ''}`}
-											id='username'
-											name='username'
-											placeholder={t('signup.login')}
-											autoComplete='username'
-										/>
-										<label htmlFor='username'>{t('signup.login')}</label>
-										<ErrorMessage component='div' className='invalid' name='username' />
-									</div>
-									<div className='form-floating'>
-										<Field
-											type='password'
-											className={`form-control reg__wrapper__input ${errors.password && touched.password ? 'is-invalid' : ''}`}
-											id='password'
-											name='password'
-											placeholder={t('signup.password')}
-											autoComplete='off'
-										/>
-										<label htmlFor='password'>{t('signup.password')}</label>
-										<ErrorMessage component='div' className='invalid' name='password' />
-									</div>
-									<div className='form-floating'>
-										<Field
-											type='password'
-											className={`form-control reg__wrapper__input ${
-												errors.confirmPassword && touched.confirmPassword ? 'is-invalid' : ''
-											}`}
-											id='confirmPassword'
-											name='confirmPassword'
-											placeholder={t('signup.confirmPassword')}
-											autoComplete='off'
-										/>
-										<label htmlFor='username'>{t('signup.confirmPassword')}</label>
-										<ErrorMessage component='div' className='invalid' name='confirmPassword' />
-										{conflictError && <div className='invalid'>{conflictError}</div>}
-									</div>
-									<button type='submit' className='btn btn-primary'>
-										{t('signup.submit')}
-									</button>
-								</Form>
-							)
-						}}
-					</Formik>
+		<div className='reg'>
+			<div className='reg__wrapper'>
+				<div>
+					<img src={logo} className='img img__circle' alt={t('signup.header')} />
 				</div>
+				<Formik initialValues={{ username: '', password: '', confirmPassword: '' }} validationSchema={signupSchema} onSubmit={handleSubmit}>
+					{({ errors, touched }) => (
+						<Form>
+							<h1 className='title'>{t('signup.header')}</h1>
+							<div className='form-floating mb-3'>
+								<Field
+									type='text'
+									className={`form-control reg__wrapper__input ${errors.username && touched.username ? 'is-invalid' : ''}`}
+									id='username'
+									name='username'
+									placeholder={t('signup.login')}
+									autoComplete='username'
+								/>
+								<label htmlFor='username'>{t('signup.login')}</label>
+								<ErrorMessage component='div' className='invalid' name='username' />
+							</div>
+							<div className='form-floating'>
+								<Field
+									type='password'
+									className={`form-control reg__wrapper__input ${errors.password && touched.password ? 'is-invalid' : ''}`}
+									id='password'
+									name='password'
+									placeholder={t('signup.password')}
+									autoComplete='off'
+								/>
+								<label htmlFor='password'>{t('signup.password')}</label>
+								<ErrorMessage component='div' className='invalid' name='password' />
+							</div>
+							<div className='form-floating'>
+								<Field
+									type='password'
+									className={`form-control reg__wrapper__input ${errors.confirmPassword && touched.confirmPassword ? 'is-invalid' : ''}`}
+									id='confirmPassword'
+									name='confirmPassword'
+									placeholder={t('signup.confirmPassword')}
+									autoComplete='off'
+								/>
+								<label htmlFor='username'>{t('signup.confirmPassword')}</label>
+								<ErrorMessage component='div' className='invalid' name='confirmPassword' />
+								{conflictError && <div className='invalid'>{conflictError}</div>}
+							</div>
+							<button type='submit' className='btn btn-primary'>
+								{t('signup.submit')}
+							</button>
+						</Form>
+					)}
+				</Formik>
 			</div>
-		</>
+		</div>
 	)
 }
 

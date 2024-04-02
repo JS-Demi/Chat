@@ -33,7 +33,7 @@ const PopUpRemoveChannel = ({ modalInfo, handleClose, setActiveChannel, activeCh
 	}
 
 	return (
-		<Modal show={true} onHide={handleClose} size='lg' aria-labelledby='contained-modal-title-vcenter' centered>
+		<Modal show onHide={handleClose} size='lg' aria-labelledby='contained-modal-title-vcenter' centered>
 			<Modal.Header closeButton>
 				<Modal.Title id='contained-modal-title-vcenter'>{t('popUp.removeChannel')}</Modal.Title>
 			</Modal.Header>
