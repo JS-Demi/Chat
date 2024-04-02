@@ -25,14 +25,16 @@ const Messages = ({ activeChannel }) => {
 	// get count of messages in channel
 
 	// create handle submit for send message
-	const handleSendMessage = ({ body }) => {
+	const handleSendMessage = ({ body }, { resetForm }) => {
 		// filter bad words
 		const filtered = filter.clean(body, '*', 0)
 		// create message for our api
 		const message = { body: filtered, channelId: activeChannelId, username }
 		sendMessage(message)
 			.unwrap()
-			.then(() => {})
+			.then(() => {
+				resetForm()
+			})
 			.catch((error) => console.log(error))
 	}
 

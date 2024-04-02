@@ -1,9 +1,15 @@
-.modal {
-	position: fixed;
-	height: 100vh;
-	width: 100vw;
+.modal-dialog {
+	width: 550px;
 }
-.modal-content {
-	width: 50vw;
-	font-weight: 500;
+.modal-title {
+	font-size: 28px;
+}
+.modal-body {
+	font-size: 25px;
+	font-weight: 300;
+	button {
+		margin: 5px;
+		margin-top: 10px;
+		font-size: 18px;
+	}
 }

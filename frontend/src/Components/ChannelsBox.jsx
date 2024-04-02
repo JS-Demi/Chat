@@ -17,7 +17,6 @@ const Channels = ({ handleUserAction, activeChannel, setActiveChannel }) => {
 		const { id, name } = currentTarget
 		setActiveChannel({ id, name })
 	}
-
 	return channels?.map(({ name, id, removable }) => (
 		<li className='nav-item w-100' key={id}>
 			{!removable ? (
@@ -25,7 +24,7 @@ const Channels = ({ handleUserAction, activeChannel, setActiveChannel }) => {
 					onClick={handleSetActiveChannel}
 					id={id}
 					name={name}
-					className='w-100 rounded-0 text-start'
+					className='channel w-100 rounded-0 text-start'
 					variant={activeChannelId === id ? 'secondary' : ''}
 				>
 					<span className='me-1'># {name}</span>
@@ -37,7 +36,7 @@ const Channels = ({ handleUserAction, activeChannel, setActiveChannel }) => {
 							onClick={handleSetActiveChannel}
 							id={id}
 							name={name}
-							className='w-100 rounded-0 text-start text-truncate over-text'
+							className='channel w-100 rounded-0 text-start text-truncate over-text'
 							variant={activeChannelId === id ? 'secondary' : ''}
 						>
 							<span className='me-1'>#</span> {name}

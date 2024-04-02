@@ -5,20 +5,21 @@ import { toast } from 'react-toastify'
 import { useRemoveChannelMutation } from '../../store/services/channelsApi'
 import './modals.scss'
 
-const PopUpRemoveChannel = ({ modalInfo, handleClose, setActiveChannel }) => {
+const PopUpRemoveChannel = ({ modalInfo, handleClose, setActiveChannel, activeChannelId }) => {
 	// use hooks for i18n and remove channel
 	const { t } = useTranslation()
 	const [removeChannel] = useRemoveChannelMutation()
 
 	// get the id of the channel to be deleted
 	const { id } = modalInfo
-
 	// create handle submit for remove channel
 	const handleSubmit = () => {
 		removeChannel(id)
 			.unwrap()
 			.then(() => {
-				setActiveChannel({ name: 'General', id: 1 })
+				if (activeChannelId === id) {
+					setActiveChannel({ name: 'General', id: '1' })
+				}
 				toast.success(t('toastify.successRemove'))
 				handleClose()
 			})
@@ -38,15 +39,16 @@ const PopUpRemoveChannel = ({ modalInfo, handleClose, setActiveChannel }) => {
 			</Modal.Header>
 			<Modal.Body>
 				<span className='italic'>{t('popUp.confirm')}</span>
+
+				<div className='d-flex justify-content-end'>
+					<button type='button' className='btn btn-secondary' onClick={handleClose}>
+						{t('popUp.cancel')}
+					</button>
+					<button onClick={handleSubmit} type='button' className='btn btn-danger'>
+						{t('popUp.remove')}
+					</button>
+				</div>
 			</Modal.Body>
-			<div className='d-flex justify-content-end'>
-				<button type='button' className='btn btn-secondary' onClick={handleClose}>
-					{t('popUp.cancel')}
-				</button>
-				<button onClick={handleSubmit} type='button' className='btn btn-danger'>
-					{t('popUp.remove')}
-				</button>
-			</div>
 		</Modal>
 	)
 }
