@@ -35,19 +35,9 @@ rules:
   testing-library/no-debug: 0
   react/jsx-filename-extension: [1, { 'extensions': ['.js', '.jsx'] }]
   functional/no-return-void: 0
-  semi: 0
   import/no-useless-path-segments: 0
-  indent: 0
-  react/jsx-indent: 0
-  react/jsx-indent-props: 0
-  jsx-quotes: 0
-  no-tabs: 0
-  max-len: 0
-  import/prefer-default-export: 0
-  implicit-arrow-linebreak: 0
-  object-curly-newline: 0
   no-confusing-arrow: 0
-  react/jsx-wrap-multilines: 0
-  react/jsx-one-expression-per-line: 0
   operator-linebreak: 0
   comma-dangle: 0
+  object-curly-newline: 0
+  implicit-arrow-linebreak: 0
