@@ -67,7 +67,7 @@ const LoginForm = () => {
 									className={`form-control log__wrapper__input ${isError ? 'is-invalid' : ''}`}
 								/>
 								<label htmlFor='password'>{t('login.password')}</label>
-								{isError && <span className='invalid'> {t('login.errors.wrongData')}</span>}
+								{isError && <div className='invalid'> {t('login.errors.wrongData')}</div>}
 							</div>
 							<button type='submit' className='btn btn-primary'>
 								{t('login.submit')}
