@@ -34,7 +34,7 @@ const Channels = ({ handleUserAction, activeChannel, setActiveChannel }) => {
 					<Button
 						onClick={handleSetActiveChannel}
 						id={id}
-						className='channel w-100 rounded-0 text-start text-truncate over-text'
+						className='w-100 rounded-0 text-start text-truncate'
 						variant={activeChannelId === id ? 'secondary' : ''}
 					>
 						<span className='me-1'>#</span>
