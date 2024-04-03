@@ -7,6 +7,10 @@ export const usePopUpSchema = () => {
 	const { data } = useGetChannelsQuery()
 	const depends = data.map(({ name }) => name)
 	return Yup.object().shape({
-		name: Yup.string().min(3, t('popUp.errors.min')).max(20, t('popUp.errors.max')).notOneOf(depends, t('popUp.errors.match')),
+		name: Yup.string()
+			.required(t('popUp.errors.required'))
+			.min(3, t('popUp.errors.size'))
+			.max(20, t('popUp.errors.size'))
+			.notOneOf(depends, t('popUp.errors.match')),
 	})
 }
