@@ -1,3 +1,4 @@
+/* eslint-disable comma-dangle */
 /* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable object-curly-newline */
 import { Field, Form, Formik } from 'formik';

@@ -1,8 +1,8 @@
 import React from 'react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Layout from '../../Components/Layout';
 import RoutesList from '../../Routes/RoutesList';
+import Layout from '../Layout';
 
 const App = () => (
   <>

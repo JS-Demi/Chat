@@ -35,7 +35,4 @@ rules:
   testing-library/no-debug: 0
   react/jsx-filename-extension: [1, { 'extensions': ['.js', '.jsx'] }]
   functional/no-return-void: 0
-  import/no-useless-path-segments: 0
-  no-confusing-arrow: 0
   operator-linebreak: 0
-  comma-dangle: 0
