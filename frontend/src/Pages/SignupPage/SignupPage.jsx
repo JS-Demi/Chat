@@ -92,7 +92,7 @@ const SignupPage = () => {
 									placeholder={t('signup.confirmPassword')}
 									autoComplete='off'
 								/>
-								<label htmlFor='username'>{t('signup.confirmPassword')}</label>
+								<label htmlFor='confirmPassword'>{t('signup.confirmPassword')}</label>
 								<ErrorMessage component='div' className='invalid' name='confirmPassword' />
 								{conflictError && <div className='invalid'>{conflictError}</div>}
 							</div>
