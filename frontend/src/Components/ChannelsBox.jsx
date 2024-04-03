@@ -40,7 +40,14 @@ const Channels = ({ handleUserAction, activeChannel, setActiveChannel }) => {
 						<span className='me-1'>#</span>
 						{name}
 					</Button>
-					<Dropdown.Toggle split className='flex-grow-0' variant={activeChannelId === id ? 'secondary' : ''} id='dropdown-split-basic' />
+					<Dropdown.Toggle
+						split
+						className='flex-grow-0'
+						variant={activeChannelId === id ? 'secondary' : ''}
+						id='dropdown-split-basic'
+					>
+						<span className='visually-hidden'>{t('chat.channels.manageChannel')}</span>
+					</Dropdown.Toggle>
 					<Dropdown.Menu>
 						<Dropdown.Item onClick={handleUserAction('renameChannel')} data-id={id}>
 							{t('chat.channels.actionRename')}
@@ -49,7 +56,6 @@ const Channels = ({ handleUserAction, activeChannel, setActiveChannel }) => {
 							{t('chat.channels.actionRemove')}
 						</Dropdown.Item>
 					</Dropdown.Menu>
-					<span className='visually-hidden'>{t('chat.channels.manageChannel')}</span>
 				</Dropdown>
 			)}
 		</li>
