@@ -19,11 +19,10 @@ const MainPage = () => {
   // create handles for state our modals
   const handleClose = () => setModalInfo({ type: null, id: null });
   // prettier-ignore
-  const handleUserAction = (type) =>
-    ({ currentTarget }) => {
-      const { id } = currentTarget.dataset;
-      setModalInfo({ type, id });
-    };
+  const handleUserAction = (type) => ({ currentTarget }) => {
+    const { id } = currentTarget.dataset;
+    setModalInfo({ type, id });
+  };
 
   return (
     <div className="chat">

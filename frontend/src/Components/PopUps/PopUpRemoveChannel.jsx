@@ -4,8 +4,10 @@ import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import { useRemoveChannelMutation } from '../../store/services/channelsApi';
 import './modals.scss';
-
-const PopUpRemoveChannel = ({ modalInfo, handleClose, setActiveChannel, activeChannelId }) => {
+// prettier-ignore
+const PopUpRemoveChannel = ({
+  modalInfo, handleClose, setActiveChannel, activeChannelId
+}) => {
   // use hooks for i18n and remove channel
   const { t } = useTranslation();
   const [removeChannel] = useRemoveChannelMutation();

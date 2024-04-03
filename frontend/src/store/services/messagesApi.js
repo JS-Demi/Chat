@@ -8,7 +8,7 @@ const prepareHeaders = (headers) => {
   }
   return headers;
 };
-
+// prettier-ignore
 export const api = createApi({
   reducerPath: 'messages',
   baseQuery: fetchBaseQuery({ baseUrl: 'api/v1/messages', prepareHeaders }),
@@ -16,10 +16,9 @@ export const api = createApi({
   endpoints: (builder) => ({
     getMessages: builder.query({
       query: () => '',
-      providesTags: (result) =>
-        result
-          ? [...result.map(({ channelId }) => ({ type: 'Message', id: channelId })), 'Message']
-          : ['Message'],
+      providesTags: (result) => result
+        ? [...result.map(({ channelId }) => ({ type: 'Message', id: channelId })), 'Message']
+        : ['Message'],
       async onCacheEntryAdded(arg, { updateCachedData, cacheDataLoaded, cacheEntryRemoved }) {
         const socket = io();
         try {

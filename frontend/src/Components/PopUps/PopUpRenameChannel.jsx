@@ -1,3 +1,4 @@
+/* eslint-disable object-curly-newline */
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import * as filter from 'leo-profanity';
 import React, { useEffect, useRef } from 'react';

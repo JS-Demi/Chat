@@ -1,3 +1,5 @@
+/* eslint-disable implicit-arrow-linebreak */
+/* eslint-disable object-curly-newline */
 import { Field, Form, Formik } from 'formik';
 import * as filter from 'leo-profanity';
 import React, { useEffect, useRef } from 'react';

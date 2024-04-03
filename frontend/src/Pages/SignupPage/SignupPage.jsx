@@ -1,3 +1,4 @@
+/* eslint-disable object-curly-newline */
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';

@@ -1,3 +1,4 @@
+/* eslint-disable implicit-arrow-linebreak */
 import { configureStore } from '@reduxjs/toolkit';
 import { api as loginApi } from './services/authenticationApi.js';
 import { api as channelsApi } from './services/channelsApi.js';
