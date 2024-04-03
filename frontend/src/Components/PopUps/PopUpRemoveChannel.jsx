@@ -38,7 +38,7 @@ const PopUpRemoveChannel = ({ modalInfo, handleClose, setActiveChannel, activeCh
 				<Modal.Title id='contained-modal-title-vcenter'>{t('popUp.removeChannel')}</Modal.Title>
 			</Modal.Header>
 			<Modal.Body>
-				<span className='italic'>{t('popUp.confirm')}</span>
+				<p className='lead'>{t('popUp.confirm')}</p>
 
 				<div className='d-flex justify-content-end'>
 					<button type='button' className='btn btn-secondary' onClick={handleClose}>

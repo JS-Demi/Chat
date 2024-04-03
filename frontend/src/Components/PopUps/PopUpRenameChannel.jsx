@@ -66,10 +66,16 @@ const PopUpRenameChannel = ({ modalInfo, handleClose }) => {
 					{({ errors, isSubmitting }) => (
 						<Form>
 							<div>
-								<label id='name' className='visually-hidden' htmlFor='name'>
+								<Field
+									id='name'
+									className={`form-control ${!errors.name ? '' : 'is-invalid'}`}
+									type='text'
+									name='name'
+									innerRef={inputRef}
+								/>
+								<label className='visually-hidden' htmlFor='name'>
 									{t('popUp.label')}
 								</label>
-								<Field className={`form-control ${!errors.name ? '' : 'is-invalid'}`} type='text' name='name' innerRef={inputRef} />
 								<ErrorMessage component='div' className='invalid-feedback' name='name' />
 							</div>
 							<div className='d-flex justify-content-end'>
