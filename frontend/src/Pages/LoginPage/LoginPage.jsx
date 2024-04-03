@@ -52,6 +52,7 @@ const LoginForm = () => {
 									type='text'
 									required
 									name='username'
+									id='username'
 									autoComplete='username'
 									placeholder={t('login.login')}
 									innerRef={usernameInputRef}
@@ -62,9 +63,9 @@ const LoginForm = () => {
 							<div className='form-floating mb-3'>
 								<Field
 									placeholder={t('login.password')}
-									required
 									type='password'
 									name='password'
+									id='password'
 									autoComplete='current-password'
 									className={`form-control log__wrapper__input ${isError ? 'is-invalid' : ''}`}
 								/>
