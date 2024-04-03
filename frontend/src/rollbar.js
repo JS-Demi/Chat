@@ -7,13 +7,13 @@ const rollbarConfig = {
 };
 const RollbarProvider = ({ children }) => {
   // check our environment
-  const isDev = process.env.NODE_ENV === 'development';
-  return isDev ? (
-    children
-  ) : (
+  const isProd = process.env.NODE_ENV === 'production';
+  return isProd ? (
     <Provider config={rollbarConfig}>
       <ErrorBoundary>{children}</ErrorBoundary>
     </Provider>
+  ) : (
+    children
   );
 };
 
