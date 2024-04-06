@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
-import ChannelsBox from '../../componentss/ChannelsBox';
-import MessagesBox from '../../componentss/MessagesBox';
-import PopUpLayout from '../../componentss/PopUps/PopUpLayout';
+import ChannelsBox from '../../components/ChannelsBox';
+import MessagesBox from '../../components/MessagesBox';
+import PopUpLayout from '../../components/PopUps/PopUpLayout';
 import socket from '../../socket';
 
 const Chat = () => {

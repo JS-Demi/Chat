@@ -1,6 +1,6 @@
-import PopUpAddChannel from '../componentss/PopUps/PopUpAddChannel';
-import PopUpRemoveChannel from '../componentss/PopUps/PopUpRemoveChannel';
-import PopUpRenameChannel from '../componentss/PopUps/PopUpRenameChannel';
+import PopUpAddChannel from '../components/PopUps/PopUpAddChannel';
+import PopUpRemoveChannel from '../components/PopUps/PopUpRemoveChannel';
+import PopUpRenameChannel from '../components/PopUps/PopUpRenameChannel';
 
 const callModal = (type) => {
   const modal = {
