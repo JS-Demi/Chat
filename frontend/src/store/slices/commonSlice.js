@@ -22,8 +22,7 @@ const commonSlice = createSlice({
 // prettier-ignore
 export const {
   setActiveChannel, setPopUpData, setCredentials, removeCredentials,
-} =
-  commonSlice.actions;
+} = commonSlice.actions;
 export const selectActiveChannel = (state) => state.common.activeChannel;
 export const selectPopUpData = (state) => state.common.popUpData;
 export default commonSlice.reducer;
