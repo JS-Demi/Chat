@@ -1,7 +1,7 @@
 import React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
-import Chat from '../pages/ChatPage/ChatPage';
+import ChatPage from '../pages/ChatPage/ChatPage';
 import ErrorPage from '../pages/ErrorPage/ErrorPage';
 import LoginPage from '../pages/LoginPage/LoginPage';
 import SignupPage from '../pages/SignupPage/SignupPage';
@@ -17,7 +17,7 @@ const RoutesList = () => (
     {/* prettier-ignore */}
     <Route
       path="/"
-      element={<PrivateRoute><Chat /></PrivateRoute>}
+      element={<PrivateRoute><ChatPage /></PrivateRoute>}
     />
     <Route path="/login" element={<LoginPage />} />
     <Route path="/signup" element={<SignupPage />} />
