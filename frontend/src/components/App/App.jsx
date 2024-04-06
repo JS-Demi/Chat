@@ -1,7 +1,7 @@
 import React from 'react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import RoutesList from '../../Routes/RoutesList';
+import RoutesList from '../../routes/RoutesList';
 import Layout from '../Layout';
 // prettier-ignore
 const App = () => (

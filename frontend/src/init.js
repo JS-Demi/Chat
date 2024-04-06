@@ -4,7 +4,7 @@ import React from 'react';
 import { I18nextProvider, initReactI18next } from 'react-i18next';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
-import App from './Components/App/App';
+import App from './components/App/App';
 import resources from './locales';
 import RollbarProvider from './rollbar';
 import socket from './socket';
