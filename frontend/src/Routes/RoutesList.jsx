@@ -2,9 +2,9 @@ import React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
 import Chat from '../pages/ChatPage/Chat.jsx';
-import ErrorPage from '../pages/ErrorPage/ErrorPage';
-import LoginPage from '../pages/LoginPage/LoginPage';
-import SignupPage from '../pages/SignupPage/SignupPage';
+import ErrorPage from '../pages/ErrorPage/ErrorPage.jsx';
+import LoginPage from '../pages/LoginPage/LoginPage.jsx';
+import SignupPage from '../pages/SignupPage/SignupPage.jsx';
 
 const PrivateRoute = ({ children }) => {
   const { user } = useAuth();
