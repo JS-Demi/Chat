@@ -2,7 +2,7 @@ const ru = {
   translation: {
     header: {
       chatName: 'Hexlet Chat',
-      logOut: 'Выйти',
+      logout: 'Выйти',
     },
     login: {
       header: 'Войти',

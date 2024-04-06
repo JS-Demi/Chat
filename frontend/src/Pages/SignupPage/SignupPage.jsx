@@ -1,23 +1,35 @@
-/* eslint-disable object-curly-newline */
-import { ErrorMessage, Field, Form, Formik } from 'formik';
-import React, { useState } from 'react';
+// prettier-ignore
+import {
+  ErrorMessage, Field, Form, Formik,
+} from 'formik';
+import React, { useEffect, useRef, useState } from 'react';
+import { Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
-import logo from '../../Assets/avatar_1.jpg';
+import logo from '../../assets/avatar_1.jpg';
+import useAuth from '../../hooks/useAuth';
 import { useCreateUserMutation } from '../../store/services/authenticationApi';
-import './SignupPage.scss';
 
 const SignupPage = () => {
   // use hook for navigate user
   const navigate = useNavigate();
 
+  const { login } = useAuth();
+
+  const inputRef = useRef(null);
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, []);
+
   // create state for conflict error if user already exists
   const [conflictError, setConflictError] = useState(null);
 
   // use hook for i18n and create user
-  const [createUser] = useCreateUserMutation();
+  const [createUser, { isLoading }] = useCreateUserMutation();
   const { t } = useTranslation();
 
   // create schema for signup
@@ -36,14 +48,12 @@ const SignupPage = () => {
   const handleSubmit = (values) => {
     createUser(values)
       .unwrap()
-      .then((res) => {
+      .then((user) => {
         setConflictError(null);
-        localStorage.setItem('access_token', res.token);
-        localStorage.setItem('user', res.username);
+        login(user);
         navigate('/');
       })
       .catch((error) => {
-        console.log(error);
         if (error.status === 409) {
           setConflictError(t('signup.errors.alreadyExist'));
         }
@@ -73,6 +83,7 @@ const SignupPage = () => {
                   className={`form-control reg__wrapper__input ${
                     errors.username && touched.username ? 'is-invalid' : ''
                   }`}
+                  innerRef={inputRef}
                   id="username"
                   name="username"
                   placeholder={t('signup.login')}
@@ -110,9 +121,9 @@ const SignupPage = () => {
                 <ErrorMessage component="div" className="invalid" name="confirmPassword" />
                 {conflictError && <div className="invalid">{conflictError}</div>}
               </div>
-              <button type="submit" className="btn btn-primary">
+              <Button type="submit" disabled={isLoading} variant="primary">
                 {t('signup.submit')}
-              </button>
+              </Button>
             </Form>
           )}
         </Formik>

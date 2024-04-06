@@ -1,3 +1,7 @@
 @import '~bootstrap/scss/bootstrap';
 @import '~react-toastify/dist/ReactToastify.css';
-// @import './Assets/fonts.scss';
+@import './pages/Chat/chat.scss';
+@import './pages/LoginPage/login.scss';
+@import './pages/SignupPage/SignupPage.scss';
+@import './pages/ErrorPage/ErrorPage.scss';
+@import './Components/PopUps/popUp.scss';

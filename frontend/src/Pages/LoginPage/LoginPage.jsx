@@ -1,38 +1,37 @@
 import { Field, Form, Formik } from 'formik';
 import React, { useEffect, useRef } from 'react';
+import { Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import logo from '../../Assets/avatar.jpg';
+import logo from '../../assets/avatar.jpg';
+import useAuth from '../../hooks/useAuth';
 import { useLoginMutation } from '../../store/services/authenticationApi';
-import './login.scss';
 
 const LoginForm = () => {
   const navigate = useNavigate();
-  const [login, { isError }] = useLoginMutation();
+  const [login, { isError, isLoading }] = useLoginMutation();
   const { t } = useTranslation();
+  const { login: enter } = useAuth();
 
-  const usernameInputRef = useRef(null);
+  const inputRef = useRef(null);
   useEffect(() => {
-    if (usernameInputRef.current) {
-      usernameInputRef.current.focus();
+    if (inputRef.current) {
+      inputRef.current.focus();
     }
-  }, [usernameInputRef]);
+  }, []);
 
   const handleLogin = async (values) => {
     login(values)
       .unwrap()
       .then((user) => {
-        localStorage.setItem('access_token', user.token);
-        localStorage.setItem('user', user.username);
+        enter(user);
         navigate('/');
-        // subscribe()
       })
       .catch((err) => {
         if (err.status === 'FETCH_ERROR') {
           toast.error(t('toastify.fetchError'));
         }
-        console.log(err.message);
       });
   };
 
@@ -55,7 +54,7 @@ const LoginForm = () => {
                   id="username"
                   autoComplete="username"
                   placeholder={t('login.login')}
-                  innerRef={usernameInputRef}
+                  innerRef={inputRef}
                   className={`form-control log__wrapper__input ${isError ? 'is-invalid' : ''}`}
                 />
                 <label htmlFor="username">{t('login.login')}</label>
@@ -72,9 +71,9 @@ const LoginForm = () => {
                 <label htmlFor="password">{t('login.password')}</label>
                 {isError && <div className="invalid">{t('login.errors.wrongData')}</div>}
               </div>
-              <button type="submit" className="btn btn-primary">
+              <Button type="submit" disabled={isLoading} variant="primary">
                 {t('login.submit')}
-              </button>
+              </Button>
             </Form>
           )}
         </Formik>

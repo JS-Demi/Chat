@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.scss';
-import Init from './init';
+import init from './init';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('app'));
-const vdom = await Init();
+const vdom = await init();
 root.render(<React.StrictMode>{vdom}</React.StrictMode>);
 
 // If you want to start measuring performance in your app, pass a function

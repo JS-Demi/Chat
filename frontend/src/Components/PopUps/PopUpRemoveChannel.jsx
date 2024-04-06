@@ -1,27 +1,30 @@
-/* eslint-disable comma-dangle */
 import React from 'react';
-import { Modal } from 'react-bootstrap';
+import { Button, Modal } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
+import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { useRemoveChannelMutation } from '../../store/services/channelsApi';
-import './modals.scss';
+import { selectActiveChannel, setActiveChannel } from '../../store/slices/commonSlice';
 // prettier-ignore
 const PopUpRemoveChannel = ({
-  modalInfo, handleClose, setActiveChannel, activeChannelId
+  popUpData, handleClose,
 }) => {
+  const dispatch = useDispatch();
   // use hooks for i18n and remove channel
   const { t } = useTranslation();
-  const [removeChannel] = useRemoveChannelMutation();
+  const [removeChannel, { isLoading }] = useRemoveChannelMutation();
+  // get the id of the channel to be deleted and activeChannel id
+  const { id } = popUpData;
+  const { id: activeChannelId } = useSelector(selectActiveChannel);
 
-  // get the id of the channel to be deleted
-  const { id } = modalInfo;
+  const defaultChannel = { name: 'general', id: '1' };
   // create handle submit for remove channel
   const handleSubmit = () => {
     removeChannel(id)
       .unwrap()
       .then(() => {
         if (activeChannelId === id) {
-          setActiveChannel({ name: 'general', id: '1' });
+          dispatch(setActiveChannel(defaultChannel));
         }
         toast.success(t('toastify.successRemove'));
         handleClose();
@@ -30,8 +33,6 @@ const PopUpRemoveChannel = ({
         if (error.status === 'FETCH_ERROR') {
           toast.error(t('toastify.fetchError'));
         }
-        handleClose();
-        console.log(error);
       });
   };
 
@@ -50,12 +51,12 @@ const PopUpRemoveChannel = ({
         <p className="lead">{t('popUp.confirm')}</p>
 
         <div className="d-flex justify-content-end">
-          <button type="button" className="btn btn-secondary" onClick={handleClose}>
+          <Button variant="secondary" onClick={handleClose}>
             {t('popUp.cancel')}
-          </button>
-          <button onClick={handleSubmit} type="button" className="btn btn-danger">
+          </Button>
+          <Button disabled={isLoading} onClick={handleSubmit} variant="danger">
             {t('popUp.remove')}
-          </button>
+          </Button>
         </div>
       </Modal.Body>
     </Modal>

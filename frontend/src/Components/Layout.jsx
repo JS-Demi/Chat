@@ -1,30 +1,32 @@
 import React from 'react';
+import { Button } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
-import { useLocalStorage } from '../hooks/useLocalStorage';
+import useAuth from '../hooks/useAuth';
 
 const Layout = () => {
   // get access data
-  const isLoggedIn = useLocalStorage();
+  const { logout, user } = useAuth();
+  const isLoggedIn = !!user;
 
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const handleLogout = () => {
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('user');
+    logout('user');
     navigate('/login');
-    console.log('logout');
   };
   return (
     <>
       <nav className="shadow-sm navbar navbar-expand-lg navbar-light bg-white">
         <div className="container">
           <Link to="/" className="navbar-brand">
-            Hexlet Chat
+            {t('header.chatName')}
           </Link>
-          {!!isLoggedIn && (
-            <button onClick={handleLogout} className="btn btn-primary" type="button">
-              Выйти
-            </button>
+          {isLoggedIn && (
+            <Button onClick={handleLogout} variant="primary">
+              {t('header.logout')}
+            </Button>
           )}
         </div>
       </nav>

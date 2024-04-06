@@ -1,15 +1,15 @@
 import React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
-import ErrorPage from '../Pages/ErrorPage/ErrorPage';
-import LoginPage from '../Pages/LoginPage/LoginPage';
-import Chat from '../Pages/MainPage/Chat';
-import SignupPage from '../Pages/SignupPage/SignupPage';
-import { useLocalStorage } from '../hooks/useLocalStorage';
+import useAuth from '../hooks/useAuth';
+import Chat from '../pages/Chat/Chat';
+import ErrorPage from '../pages/ErrorPage/ErrorPage';
+import LoginPage from '../pages/LoginPage/LoginPage';
+import SignupPage from '../pages/SignupPage/SignupPage';
 
 const PrivateRoute = ({ children }) => {
-  const access = useLocalStorage();
+  const { user } = useAuth();
 
-  return access ? children : <Navigate to="/login" />;
+  return user ? children : <Navigate to="/login" />;
 };
 
 const RoutesList = () => (

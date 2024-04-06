@@ -1,26 +1,19 @@
-/* eslint-disable comma-dangle */
-// import { Form } from 'formik'
 import React from 'react';
-import callModal from './callModal';
-// prettier-ignore
-const PopUpLayout = ({
-  modalInfo, handleClose, setActiveChannel, activeChannelId
-}) => {
+import { useDispatch, useSelector } from 'react-redux';
+import { selectPopUpData, setPopUpData } from '../../store/slices/commonSlice';
+import callModal from '../../utilities/callModal';
+
+const PopUpLayout = () => {
+  const dispatch = useDispatch();
+  const popUpData = useSelector(selectPopUpData);
   // check if modal is not be called, not rendering it
-  if (!modalInfo.type) {
+  if (!popUpData) {
     return null;
   }
+  const handleClose = () => dispatch(setPopUpData(null));
   // call modal
-  const ModalComponent = callModal(modalInfo.type);
-
-  return (
-    <ModalComponent
-      modalInfo={modalInfo}
-      handleClose={handleClose}
-      setActiveChannel={setActiveChannel}
-      activeChannelId={activeChannelId}
-    />
-  );
+  const ModalComponent = callModal(popUpData.type);
+  return <ModalComponent popUpData={popUpData} handleClose={handleClose} />;
 };
 
 export default PopUpLayout;

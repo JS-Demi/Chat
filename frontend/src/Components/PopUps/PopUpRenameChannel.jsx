@@ -1,15 +1,16 @@
-/* eslint-disable object-curly-newline */
-import { ErrorMessage, Field, Form, Formik } from 'formik';
+// prettier-ignore
+import {
+  ErrorMessage, Field, Form, Formik,
+} from 'formik';
 import * as filter from 'leo-profanity';
 import React, { useEffect, useRef } from 'react';
-import { Modal } from 'react-bootstrap';
+import { Button, Modal } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import { usePopUpSchema } from '../../hooks/usePopUpSchema';
 import { useGetChannelsQuery, useRenameChannelMutation } from '../../store/services/channelsApi';
-import './modals.scss';
 
-const PopUpRenameChannel = ({ modalInfo, handleClose }) => {
+const PopUpRenameChannel = ({ popUpData, handleClose }) => {
   // creating ref for input and set focus and select on it
   const inputRef = useRef();
   useEffect(() => {
@@ -17,22 +18,21 @@ const PopUpRenameChannel = ({ modalInfo, handleClose }) => {
       inputRef.current.focus();
       inputRef.current.select();
     }
-  }, [inputRef]);
+  }, []);
 
   // use hooks for i18n, rename channel, schema and data for initial state form
   const { data: channels } = useGetChannelsQuery();
   const { t } = useTranslation();
-  const [renameChannel] = useRenameChannelMutation();
+  const [renameChannel, { isLoading }] = useRenameChannelMutation();
   const schema = usePopUpSchema();
 
   // get id of the channel to change and channel for initial state
-  const { id } = modalInfo;
+  const { id } = popUpData;
   const channel = channels.find((c) => c.id === id);
   // create handle submit for rename channel
   const handleSubmit = ({ name }) => {
     // filter bad words
     const filtered = { name: filter.clean(name, '*', 0) };
-    console.log(filtered);
     const data = { body: filtered, id };
     renameChannel(data)
       .unwrap()
@@ -44,8 +44,6 @@ const PopUpRenameChannel = ({ modalInfo, handleClose }) => {
         if (error.status === 'FETCH_ERROR') {
           toast.error(t('toastify.fetchError'));
         }
-        handleClose();
-        console.log(error);
       });
   };
 
@@ -70,7 +68,7 @@ const PopUpRenameChannel = ({ modalInfo, handleClose }) => {
           validateOnChange={false}
           validateOnBlur={false}
         >
-          {({ errors, isSubmitting }) => (
+          {({ errors }) => (
             <Form>
               <div>
                 <Field
@@ -86,12 +84,12 @@ const PopUpRenameChannel = ({ modalInfo, handleClose }) => {
                 <ErrorMessage component="div" className="invalid-feedback" name="name" />
               </div>
               <div className="d-flex justify-content-end">
-                <button type="button" className="btn btn-secondary" onClick={handleClose}>
+                <Button variant="secondary" onClick={handleClose}>
                   {t('popUp.cancel')}
-                </button>
-                <button type="submit" className="btn btn-primary" disabled={isSubmitting}>
+                </Button>
+                <Button type="submit" variant="primary" disabled={isLoading}>
                   {t('popUp.rename')}
-                </button>
+                </Button>
               </div>
             </Form>
           )}

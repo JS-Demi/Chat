@@ -3,7 +3,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import RoutesList from '../../Routes/RoutesList';
 import Layout from '../Layout';
-
+// prettier-ignore
 const App = () => (
   <>
     <div className="h-100">
@@ -13,5 +13,4 @@ const App = () => (
     <ToastContainer />
   </>
 );
-
 export default App;

@@ -7,9 +7,13 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './Components/App/App';
 import resources from './locales';
 import RollbarProvider from './rollbar';
+import socket from './socket';
+import { channelsApi } from './store/services/channelsApi';
+import { messagesApi } from './store/services/messagesApi';
 import store from './store/store';
 
-const Init = async () => {
+// prettier-ignore
+const init = async () => {
   // init leo dictionary for ru language
   filter.add(filter.getDictionary('ru'));
   // create i18next instance
@@ -24,6 +28,31 @@ const Init = async () => {
     console.log(`${err} i18next`);
   }
 
+  socket.on('newChannel', (channel) => {
+    store.dispatch(
+      channelsApi.util.updateQueryData('getChannels', undefined, (draft) => {
+        draft.push(channel);
+      }),
+    );
+  });
+  socket.on('renameChannel', (channel) => {
+    store.dispatch(
+      channelsApi.util.updateQueryData('getChannels', undefined, (draft) => draft.map((c) => (c.id === channel.id ? channel : c))),
+    );
+  });
+  socket.on('removeChannel', ({ id }) => {
+    store.dispatch(
+      channelsApi.util.updateQueryData('getChannels', undefined, (draft) => draft.filter((c) => c.id !== id)),
+    );
+  });
+  socket.on('newMessage', (message) => {
+    store.dispatch(
+      messagesApi.util.updateQueryData('getMessages', undefined, (draft) => {
+        draft.push(message);
+      }),
+    );
+  });
+
   return (
     <Provider store={store}>
       <I18nextProvider i18n={i18n}>
@@ -37,4 +66,4 @@ const Init = async () => {
   );
 };
 
-export default Init;
+export default init;

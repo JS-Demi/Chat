@@ -1,27 +1,31 @@
-/* eslint-disable object-curly-newline */
-import { ErrorMessage, Field, Form, Formik } from 'formik';
+// prettier-ignore
+import {
+  ErrorMessage, Field, Form, Formik,
+} from 'formik';
 import * as filter from 'leo-profanity';
 import React, { useEffect, useRef } from 'react';
-import { Modal } from 'react-bootstrap';
+import { Button, Modal } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
+import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { usePopUpSchema } from '../../hooks/usePopUpSchema';
 import { useAddChannelMutation } from '../../store/services/channelsApi';
-import './modals.scss';
+import { setActiveChannel } from '../../store/slices/commonSlice';
 
-const PopUpAddChannel = ({ handleClose, setActiveChannel }) => {
+const PopUpAddChannel = ({ handleClose }) => {
+  const dispatch = useDispatch();
   // create ref for focus
   const inputRef = useRef();
   useEffect(() => {
     if (inputRef.current) {
       inputRef.current.focus();
     }
-  }, [inputRef]);
+  }, []);
 
   // use hooks for i18n, create channel and schema
   const { t } = useTranslation();
-  const [addChannel] = useAddChannelMutation();
+  const [addChannel, { isLoading }] = useAddChannelMutation();
   const schema = usePopUpSchema();
 
   // create submit handle for add channel
@@ -30,8 +34,9 @@ const PopUpAddChannel = ({ handleClose, setActiveChannel }) => {
     const filtered = filter.clean(name, '*', 0);
     addChannel({ name: filtered })
       .unwrap()
-      .then((res) => {
-        setActiveChannel(res);
+      .then((response) => {
+        const currentChannel = response;
+        dispatch(setActiveChannel(currentChannel));
         toast.success(t('toastify.successCreate'));
         handleClose();
       })
@@ -39,8 +44,6 @@ const PopUpAddChannel = ({ handleClose, setActiveChannel }) => {
         if (error.status === 'FETCH_ERROR') {
           toast.error(t('toastify.fetchError'));
         }
-        handleClose();
-        console.log(error);
       });
   };
 
@@ -65,7 +68,7 @@ const PopUpAddChannel = ({ handleClose, setActiveChannel }) => {
           validateOnChange={false}
           validateOnBlur={false}
         >
-          {({ errors, isSubmitting }) => (
+          {({ errors }) => (
             <Form>
               <div>
                 <Field
@@ -81,12 +84,12 @@ const PopUpAddChannel = ({ handleClose, setActiveChannel }) => {
                 <ErrorMessage component="div" className="invalid-feedback" name="name" />
               </div>
               <div className="d-flex justify-content-end">
-                <button type="button" className="btn btn-secondary" onClick={handleClose}>
+                <Button variant="secondary" onClick={handleClose}>
                   {t('popUp.cancel')}
-                </button>
-                <button type="submit" className="btn btn-primary" disabled={isSubmitting}>
+                </Button>
+                <Button type="submit" variant="primary" disabled={isLoading}>
                   {t('popUp.add')}
-                </button>
+                </Button>
               </div>
             </Form>
           )}

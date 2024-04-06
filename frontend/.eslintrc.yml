@@ -36,3 +36,4 @@ rules:
   react/jsx-filename-extension: [1, { 'extensions': ['.js', '.jsx'] }]
   functional/no-return-void: 0
   operator-linebreak: 0
+  import/no-extraneous-dependencies: 0
