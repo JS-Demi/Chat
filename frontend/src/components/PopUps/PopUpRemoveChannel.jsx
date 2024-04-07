@@ -1,31 +1,23 @@
 import React from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { useRemoveChannelMutation } from '../../store/services/channelsApi';
-import { selectActiveChannel, setActiveChannel } from '../../store/slices/commonSlice';
 // prettier-ignore
 const PopUpRemoveChannel = ({
   popUpData, handleClose,
 }) => {
-  const dispatch = useDispatch();
   // use hooks for i18n and remove channel
   const { t } = useTranslation();
   const [removeChannel, { isLoading }] = useRemoveChannelMutation();
   // get the id of the channel to be deleted and activeChannel id
   const { id } = popUpData;
-  const { id: activeChannelId } = useSelector(selectActiveChannel);
 
-  const defaultChannel = { name: 'general', id: '1' };
   // create handle submit for remove channel
   const handleSubmit = () => {
     removeChannel(id)
       .unwrap()
       .then(() => {
-        if (activeChannelId === id) {
-          dispatch(setActiveChannel(defaultChannel));
-        }
         toast.success(t('toastify.successRemove'));
         handleClose();
       })

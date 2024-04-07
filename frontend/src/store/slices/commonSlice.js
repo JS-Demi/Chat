@@ -1,11 +1,13 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
 
+const defaultChannel = { name: 'general', id: '1' };
 const initialState = {
   popUpData: null,
-  activeChannel: { name: 'general', id: '1' },
+  activeChannel: defaultChannel,
   username: null,
   token: null,
+  defaultChannel,
 };
 const commonSlice = createSlice({
   name: 'common',
@@ -25,4 +27,5 @@ export const {
 } = commonSlice.actions;
 export const selectActiveChannel = (state) => state.common.activeChannel;
 export const selectPopUpData = (state) => state.common.popUpData;
+export const selectDefaultChannel = (state) => state.common.defaultChannel;
 export default commonSlice.reducer;

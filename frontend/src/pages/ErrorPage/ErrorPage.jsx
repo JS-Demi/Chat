@@ -1,17 +1,21 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
-const ErrorPage = () => (
-  <div className="error-page">
-    <section className="error-page__content wrapper">
-      <h1 className="error-page__title">Упс...</h1>
-      <h2 className="error-page__subtitle">Такой страницы не существует </h2>
-      <p className="error-page__text">Произошла ошибка, вернитесь на главную страницу</p>
-      <Link className="error-page__btn btn btn--bg" to="/">
-        На главную
-      </Link>
-    </section>
-  </div>
-);
+const ErrorPage = () => {
+  const { t } = useTranslation();
+  return (
+    <div className="error-page">
+      <section className="error-page__content wrapper">
+        <h1 className="error-page__title">{t('errorPage.title')}</h1>
+        <h2 className="error-page__subtitle">{t('errorPage.subtitle')}</h2>
+        <p className="error-page__text">{t('errorPage.text')}</p>
+        <Link className="error-page__btn btn btn--bg" to="/">
+          {t('errorPage.link')}
+        </Link>
+      </section>
+    </div>
+  );
+};
 
 export default ErrorPage;

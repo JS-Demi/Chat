@@ -11,10 +11,12 @@ import * as Yup from 'yup';
 import logo from '../../assets/avatar_1.jpg';
 import useAuth from '../../hooks/useAuth';
 import { useCreateUserMutation } from '../../store/services/authenticationApi';
+import getRoutes from '../../utilities/getRoutes';
 
 const SignupPage = () => {
   // use hook for navigate user
   const navigate = useNavigate();
+  const { chatPage } = getRoutes();
 
   const { login } = useAuth();
 
@@ -51,7 +53,7 @@ const SignupPage = () => {
       .then((user) => {
         setConflictError(null);
         login(user);
-        navigate('/');
+        navigate(chatPage);
       })
       .catch((error) => {
         if (error.status === 409) {

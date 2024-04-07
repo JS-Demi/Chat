@@ -7,9 +7,11 @@ import { toast } from 'react-toastify';
 import logo from '../../assets/avatar.jpg';
 import useAuth from '../../hooks/useAuth';
 import { useLoginMutation } from '../../store/services/authenticationApi';
+import getRoutes from '../../utilities/getRoutes';
 
 const LoginForm = () => {
   const navigate = useNavigate();
+  const { chatPage } = getRoutes();
   const [login, { isError, isLoading }] = useLoginMutation();
   const { t } = useTranslation();
   const { login: enter } = useAuth();
@@ -26,7 +28,7 @@ const LoginForm = () => {
       .unwrap()
       .then((user) => {
         enter(user);
-        navigate('/');
+        navigate(chatPage);
       })
       .catch((err) => {
         if (err.status === 'FETCH_ERROR') {

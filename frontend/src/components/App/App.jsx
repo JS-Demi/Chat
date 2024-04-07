@@ -3,12 +3,12 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import RoutesList from '../../routes/RoutesList';
 import Layout from '../Layout';
-// prettier-ignore
-const App = () => (
+
+const App = ({ socket }) => (
   <>
     <div className="h-100">
       <Layout />
-      <RoutesList />
+      <RoutesList socket={socket} />
     </div>
     <ToastContainer />
   </>

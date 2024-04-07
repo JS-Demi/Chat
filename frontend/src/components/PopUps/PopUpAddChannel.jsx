@@ -34,9 +34,8 @@ const PopUpAddChannel = ({ handleClose }) => {
     const filtered = filter.clean(name, '*', 0);
     addChannel({ name: filtered })
       .unwrap()
-      .then((response) => {
-        const currentChannel = response;
-        dispatch(setActiveChannel(currentChannel));
+      .then((channel) => {
+        dispatch(setActiveChannel(channel));
         toast.success(t('toastify.successCreate'));
         handleClose();
       })

@@ -3,18 +3,20 @@ import { Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
+import getRoutes from '../utilities/getRoutes';
 
 const Layout = () => {
   // get access data
   const { logout, user } = useAuth();
   const isLoggedIn = !!user;
+  const { loginPage } = getRoutes();
 
   const navigate = useNavigate();
   const { t } = useTranslation();
 
   const handleLogout = () => {
-    logout('user');
-    navigate('/login');
+    logout();
+    navigate(loginPage);
   };
   return (
     <>
