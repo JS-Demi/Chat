@@ -12,9 +12,14 @@ import getRoutes from '../../utilities/getRoutes';
 const LoginForm = () => {
   const navigate = useNavigate();
   const { chatPage } = getRoutes();
+  const { login: enter, user } = useAuth();
   const [login, { isError, isLoading }] = useLoginMutation();
   const { t } = useTranslation();
-  const { login: enter } = useAuth();
+  useEffect(() => {
+    if (user) {
+      navigate(chatPage);
+    }
+  });
 
   const inputRef = useRef(null);
   useEffect(() => {
@@ -26,8 +31,8 @@ const LoginForm = () => {
   const handleLogin = async (values) => {
     login(values)
       .unwrap()
-      .then((user) => {
-        enter(user);
+      .then((currentUser) => {
+        enter(currentUser);
         navigate(chatPage);
       })
       .catch((err) => {

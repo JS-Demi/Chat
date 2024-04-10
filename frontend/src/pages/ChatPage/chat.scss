@@ -74,7 +74,6 @@ dropdown-menu {
     box-shadow: 1px -1px 2px #ccc;
     display: grid;
     border-bottom-right-radius: 10px;
-    // grid-template-rows: 1fr 75px;
     padding-top: 20px;
     overflow: auto !important;
     &__header {
@@ -103,6 +102,19 @@ dropdown-menu {
   @media (max-width: 768px) {
     width: 560px;
     grid-template-columns: 180px 1fr;
+  }
+  @media (max-width: 600px) {
+    width: 100vw;
+    grid-template-columns: minmax(110px, 30vw) 1fr;
+  }
+  @media (max-width: 475px) {
+    &__messages {
+      input {
+        &::placeholder {
+          font-size: 10px;
+        }
+      }
+    }
   }
 }
 

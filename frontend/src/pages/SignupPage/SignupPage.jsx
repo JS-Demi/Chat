@@ -17,8 +17,12 @@ const SignupPage = () => {
   // use hook for navigate user
   const navigate = useNavigate();
   const { chatPage } = getRoutes();
-
-  const { login } = useAuth();
+  const { login, user } = useAuth();
+  useEffect(() => {
+    if (user) {
+      navigate(chatPage);
+    }
+  });
 
   const inputRef = useRef(null);
   useEffect(() => {
@@ -50,9 +54,9 @@ const SignupPage = () => {
   const handleSubmit = (values) => {
     createUser(values)
       .unwrap()
-      .then((user) => {
+      .then((currentUser) => {
         setConflictError(null);
-        login(user);
+        login(currentUser);
         navigate(chatPage);
       })
       .catch((error) => {
