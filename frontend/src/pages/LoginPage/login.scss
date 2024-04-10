@@ -92,7 +92,7 @@
 }
 @media (max-width: 768px) {
   .log {
-    height: 70%;
+    height: 768px;
     margin-top: 70px;
     &__wrapper {
       font-size: 20px;
@@ -122,8 +122,9 @@
       margin: auto;
       &__wrapper {
         width: 90vw;
-        height: 80vh;
-        margin-top: 200px;
+        height: 90%;
+        margin: 0;
+        // padding-bottom: 150px;
         form {
           display: flex;
           flex-direction: column;
