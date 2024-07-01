@@ -7,7 +7,7 @@ import {
     ScaleFade,
     Text,
 } from '@chakra-ui/react'
-import { FC, useEffect, useRef } from 'react'
+import { FC, useEffect } from 'react'
 import { useAuth } from 'shared/lib/auth'
 import { useResize } from 'shared/lib/resize'
 import { IMessage } from 'shared/types'

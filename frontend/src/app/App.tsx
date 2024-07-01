@@ -3,7 +3,6 @@ import { AppRouter } from './routers'
 import { Providers } from './providers'
 
 const App = () => {
-    console.log(import.meta.env)
     return (
         <Providers>
             <Flex

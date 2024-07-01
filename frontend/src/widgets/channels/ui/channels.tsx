@@ -44,7 +44,6 @@ export const Channels: FC<IChannels> = ({
     const handleUserAction = (action: channelsActions, id = '', name = '') => {
         dispatch(setUserActionData({ action, id, name }))
     }
-    console.log(isMessagesOpen, isChannelsOpen)
     const handleSetActiveChannel = (id: string, name: string) => () => {
         dispatch(setActiveChannel({ id, name }))
         if (isMobileScreen) {
