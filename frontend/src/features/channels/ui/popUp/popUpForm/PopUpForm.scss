@@ -1,0 +1,41 @@
+.pop-up {
+    button {
+        text-transform: uppercase;
+    }
+    label {
+        position: absolute;
+        top: 20%;
+        left: 5%;
+        transition: 0.3s;
+        pointer-events: none;
+        background-color: #fff;
+        border-radius: 10px;
+        padding: 0 5px;
+        z-index: 1;
+        color: gray;
+    }
+
+    input {
+        &[aria-invalid='true'] ~ label {
+            color: crimson;
+        }
+        &::placeholder {
+            opacity: 0;
+        }
+        &:focus {
+            outline: none;
+            border: none;
+            box-shadow: 0 0 3px 2px #008080;
+            &[aria-invalid='true'] {
+                box-shadow: 0 0 3px 2px crimson;
+                ~ label {
+                    color: crimson;
+                }
+            }
+        }
+        &:focus ~ label,
+        &:not(:placeholder-shown) ~ label {
+            top: -30%;
+        }
+    }
+}

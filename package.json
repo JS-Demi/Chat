@@ -12,6 +12,7 @@
 	"author": "Miracle",
 	"license": "ISC",
 	"dependencies": {
+		"@chakra-ui/icons": "^2.1.1",
 		"@hexlet/chat-server": "^2.0.3"
 	}
 }
