@@ -25,24 +25,21 @@ export const Header: FC<IHeader> = () => {
             as='header'
             overflow={'hidden'}
             minH={'5%'}
+            bgColor={'#f8f8f8'}
+            p={'10px'}
             boxShadow={'0 2px 4px 0 teal'}
             borderRadius={'5px'}>
-            <Flex as={'nav'} justifyContent={'space-between'} m='10px'>
-                <Link
-                    href='https://openai.com/index/chatgpt/'
-                    target='_blank'
-                    _hover={'none'}>
-                    <Flex alignItems={'center'}>
-                        <Image
-                            w={['60px', null, '70px']}
-                            h={['60px', null, '70px']}
-                            src='light-theme-logo.png'
-                        />
-                        <Heading as={'h1'} size='lg'>
-                            {t('header.chatName')}
-                        </Heading>
-                    </Flex>
-                </Link>
+            <Flex as={'nav'} justifyContent={'space-between'}>
+                <Flex alignItems={'center'} gap={'10px'} mb={'10px'}>
+                    <Image
+                        w={['60px', null, '70px']}
+                        h={['60px', null, '70px']}
+                        src='Circle-logo.png'
+                    />
+                    <Heading as={'h1'} size='lg'>
+                        {t('header.chatName')}
+                    </Heading>
+                </Flex>
                 {isLoggedIn && (
                     <Button
                         onClick={handleLogout}
