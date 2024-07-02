@@ -1,7 +1,7 @@
-import { RejectData } from '@/shared/types'
-import { Box, Button, Container, Flex, Heading, Stack } from '@chakra-ui/react'
+import { Button, Container, Heading, Stack } from '@chakra-ui/react'
 import { useTranslation } from 'react-i18next'
 import { Link, useRouteError } from 'react-router-dom'
+import { RejectData } from 'shared/types'
 
 export const Fallback = () => {
     const { t } = useTranslation()

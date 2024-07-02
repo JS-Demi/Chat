@@ -1,5 +1,5 @@
 import { Box } from '@chakra-ui/react'
-import React, { FC } from 'react'
+import { FC } from 'react'
 
 interface IVectorFromRight {
     readonly color: string

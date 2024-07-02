@@ -1,16 +1,10 @@
-import { LoginPage } from 'pages/login'
-import { ROUTES } from 'shared/constants'
-import { Fallback } from 'shared/ui/fallback'
-import {
-    Navigate,
-    RouterProvider,
-    createBrowserRouter,
-    redirect,
-} from 'react-router-dom'
-import { Layout } from '../layout'
-import { getCredentialsToken, useAuth } from 'shared/lib/auth'
-import { FC } from 'react'
 import { Chat } from 'pages/chat'
+import { LoginPage } from 'pages/login'
+import { FC } from 'react'
+import { Navigate, RouterProvider, createBrowserRouter } from 'react-router-dom'
+import { getCredentialsToken } from 'shared/lib/auth'
+import { Fallback } from 'shared/ui/fallback'
+import { Layout } from '../layout'
 
 interface IPrivateRoute {
     readonly children: JSX.Element

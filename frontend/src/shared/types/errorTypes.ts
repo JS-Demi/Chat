@@ -1,4 +1,4 @@
 export interface RejectData {
-	readonly messageError: string
-	readonly status?: string
+    readonly status: string
+    readonly statusText?: string
 }

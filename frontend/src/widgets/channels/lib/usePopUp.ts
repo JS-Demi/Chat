@@ -1,7 +1,5 @@
 import { CreateChannel, EditChannel, RemoveChannel } from 'features/channels/ui'
-import { FC } from 'react'
 import { channelsActions } from 'shared/model/chatSlice'
-import { IPopUpProps } from 'shared/types'
 
 export const usePopUp = (action: channelsActions) => {
     const popUps = {

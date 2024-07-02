@@ -1,5 +1,5 @@
 import { Box, Flex, Link, Text } from '@chakra-ui/react'
-import React, { FC } from 'react'
+import { FC } from 'react'
 
 interface IFooter {}
 

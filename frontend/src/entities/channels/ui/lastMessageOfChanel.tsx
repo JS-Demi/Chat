@@ -1,6 +1,6 @@
 import { Box, Text } from '@chakra-ui/react'
 import { useGetMessagesQuery } from 'entities/messages/model'
-import React, { FC } from 'react'
+import { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useAuth } from 'shared/lib/auth'
 

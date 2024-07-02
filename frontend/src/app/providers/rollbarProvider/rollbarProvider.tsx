@@ -1,5 +1,5 @@
-import React, { FC } from 'react'
 import { ErrorBoundary, Provider } from '@rollbar/react'
+import { FC } from 'react'
 
 interface IRollbarProvider {
     readonly children: JSX.Element

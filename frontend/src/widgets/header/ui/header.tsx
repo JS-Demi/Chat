@@ -2,9 +2,9 @@ import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { ROUTES } from 'shared/constants'
 
-import { Box, Button, Flex, Heading, Image, Link } from '@chakra-ui/react'
-import { useAuth } from 'shared/lib/auth'
+import { Box, Button, Flex, Heading, Image } from '@chakra-ui/react'
 import { FC } from 'react'
+import { useAuth } from 'shared/lib/auth'
 
 interface IHeader {}
 
