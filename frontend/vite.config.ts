@@ -4,7 +4,7 @@ import react from '@vitejs/plugin-react'
 // https://vitejs.dev/config/
 export default defineConfig({
     plugins: [react()],
-    base: '/Chat/',
+    base: './',
     resolve: {
         alias: {
             app: '/src/app',
@@ -16,7 +16,6 @@ export default defineConfig({
         },
     },
     build: {
-        outDir: 'build',
         chunkSizeWarningLimit: 1600,
         // rollupOptions: {
         //     output: {

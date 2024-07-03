@@ -1,11 +1,11 @@
 /* eslint-disable no-param-reassign */
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
-import { IChatState, IUserActionData } from './types'
+import { IChatState, IUserActionData, channelsActions } from './types'
 import { IChannel } from 'shared/types'
 
 const defaultChannel = { name: 'general', id: '1' }
 const initialState: IChatState = {
-    userActionData: { action: null, name: '', id: '' },
+    userActionData: { action: channelsActions.CREATE, name: '', id: '' },
     activeChannel: defaultChannel,
 }
 const chatSlice = createSlice({

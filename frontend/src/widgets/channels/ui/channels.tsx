@@ -39,7 +39,7 @@ export const Channels: FC<IChannels> = ({
     const { data: channels, isSuccess, isFetching } = useGetChannelsQuery()
     const { onClose, onOpen, isOpen } = useDisclosure()
     const { action, id, name } = useAppSelector(selectUserActionData)
-    const PopUpAction = usePopUp(action!)
+    const PopUpAction = usePopUp(action)
     // handlers
     const handleUserAction = (action: channelsActions, id = '', name = '') => {
         dispatch(setUserActionData({ action, id, name }))
@@ -83,7 +83,7 @@ export const Channels: FC<IChannels> = ({
                         onOpen={onOpen}
                     />
 
-                    <PopUp isOpen={isOpen} title={action!} onClose={onClose}>
+                    <PopUp isOpen={isOpen} title={action} onClose={onClose}>
                         <PopUpAction
                             onClose={onClose}
                             name={name}

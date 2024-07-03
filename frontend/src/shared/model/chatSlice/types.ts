@@ -7,7 +7,7 @@ export enum channelsActions {
 }
 
 export interface IUserActionData {
-    action: channelsActions | null
+    action: channelsActions
     id: string
     name: string
 }

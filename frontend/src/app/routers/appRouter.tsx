@@ -39,8 +39,8 @@ export const AppRouter = () => {
                     },
                 ],
             },
-        ],
-        { basename: '/Chat/' }
+        ]
+        // { basename: '/Chat/' }
     )
     return <RouterProvider router={router} />
 }

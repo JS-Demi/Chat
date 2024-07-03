@@ -48,6 +48,8 @@ export const ChannelsPreview: FC<IChannelsPreview> = ({
                         <ScaleFade initialScale={0.7} in={true}>
                             <Button
                                 onClick={handleSetActiveChannel(id, name)}
+                                display={'inline-flex'}
+                                alignItems={'center'}
                                 variant={'ghost'}
                                 h='72px'
                                 justifyContent={'space-between'}
@@ -55,6 +57,8 @@ export const ChannelsPreview: FC<IChannelsPreview> = ({
                                 w='100%'
                                 p={0}
                                 px='5px'
+                                cursor={'pointer'}
+                                borderRadius={'5px'}
                                 colorScheme='teal'
                                 isActive={id === activeChannelId}>
                                 <Avatar
@@ -76,6 +80,9 @@ export const ChannelsPreview: FC<IChannelsPreview> = ({
                                     <PopoverTrigger>
                                         <Box
                                             position={'relative'}
+                                            pointerEvents={
+                                                removable ? 'all' : 'none'
+                                            }
                                             onClick={(e) => {
                                                 e.stopPropagation()
                                             }}>
@@ -92,9 +99,14 @@ export const ChannelsPreview: FC<IChannelsPreview> = ({
                                     </PopoverTrigger>
                                     <PopoverContent width={'150px'}>
                                         <PopoverArrow />
-                                        <Button
-                                            colorScheme='teal'
-                                            variant={'ghost'}
+                                        <Box
+                                            as='p'
+                                            color='teal'
+                                            display={'inline-flex'}
+                                            justifyContent={'center'}
+                                            alignItems={'center'}
+                                            _hover={{ bgColor: 'teal.50' }}
+                                            p='10px'
                                             onClick={(e) => {
                                                 e.stopPropagation()
                                                 handleUserAction(
@@ -105,10 +117,15 @@ export const ChannelsPreview: FC<IChannelsPreview> = ({
                                                 onOpen()
                                             }}>
                                             {t('chat.channels.actionRename')}
-                                        </Button>
-                                        <Button
-                                            colorScheme='teal'
-                                            variant={'ghost'}
+                                        </Box>
+                                        <Box
+                                            as='p'
+                                            color='teal'
+                                            display={'inline-flex'}
+                                            justifyContent={'center'}
+                                            alignItems={'center'}
+                                            _hover={{ bgColor: 'teal.50' }}
+                                            p='10px'
                                             onClick={(e) => {
                                                 e.stopPropagation()
                                                 handleUserAction(
@@ -118,7 +135,7 @@ export const ChannelsPreview: FC<IChannelsPreview> = ({
                                                 onOpen()
                                             }}>
                                             {t('chat.channels.actionRemove')}
-                                        </Button>
+                                        </Box>
                                     </PopoverContent>
                                 </Popover>
                             </Button>
