@@ -1,7 +1,9 @@
 import { Flex } from '@chakra-ui/react'
 import { FC } from 'react'
+import { ErrorBoundary } from 'react-error-boundary'
 import { useMode } from 'shared/lib/mode'
 import { useResize } from 'shared/lib/resize'
+import { Fallback } from 'shared/ui/fallback'
 import { Channels } from 'widgets/channels'
 import { Messages } from 'widgets/messages'
 

@@ -1,13 +1,12 @@
 import { Button, Container, Heading, Stack } from '@chakra-ui/react'
-import { useTranslation } from '../../../../node_modules/react-i18next'
 import { Link, useRouteError } from 'react-router-dom'
 import { RejectData } from 'shared/types'
+import { useTranslation } from '../../../../node_modules/react-i18next'
 
 export const Fallback = () => {
     const { t } = useTranslation()
     const error = useRouteError()
     const knownError = error as RejectData
-    console.log(error)
 
     return (
         <Container

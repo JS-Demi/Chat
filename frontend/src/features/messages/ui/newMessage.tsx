@@ -28,15 +28,9 @@ interface INewMessage {
     readonly channelId: string
     readonly isOpen: boolean
     readonly onOpen: () => void
-    readonly isMessagesOpen: boolean
 }
 
-export const NewMessage: FC<INewMessage> = ({
-    channelId,
-    isOpen,
-    onOpen,
-    isMessagesOpen,
-}) => {
+export const NewMessage: FC<INewMessage> = ({ channelId, isOpen, onOpen }) => {
     const { t } = useTranslation()
 
     const [sendMessage, { isLoading }] = useSendMessageMutation()
@@ -47,7 +41,7 @@ export const NewMessage: FC<INewMessage> = ({
     const { isMobileScreen } = useResize()
 
     useEffect(() => {
-        if (inputRef.current && !isMobileScreen && isMessagesOpen) {
+        if (inputRef.current && !isMobileScreen) {
             inputRef.current.focus()
         }
     })

@@ -10,6 +10,7 @@ import { ChannelsPreview } from 'entities/channels/ui'
 import { CreateChannelButton } from 'features/channels/ui'
 import { ControlMenu } from 'features/channels/ui/control-menu'
 import { FC } from 'react'
+import { useAuth } from 'shared/lib/auth'
 import { useAppDispatch, useAppSelector } from 'shared/lib/store'
 import {
     channelsActions,
@@ -36,7 +37,18 @@ export const Channels: FC<IChannels> = ({
 }) => {
     // hooks
     const dispatch = useAppDispatch()
-    const { data: channels, isSuccess, isFetching } = useGetChannelsQuery()
+    const {
+        data: channels,
+        isSuccess,
+        isFetching,
+        error,
+    } = useGetChannelsQuery()
+    const { removeCredentials } = useAuth()
+    if (error) {
+        if ('status' in error && error.status === 401) {
+            removeCredentials()
+        }
+    }
     const { onClose, onOpen, isOpen } = useDisclosure()
     const { action, id, name } = useAppSelector(selectUserActionData)
     const PopUpAction = usePopUp(action)

@@ -17,6 +17,7 @@ import { toast } from 'react-toastify'
 import { ROUTES } from 'shared/constants'
 import { setCredentials } from 'shared/lib/auth'
 import { IAuthResponse, LoginState } from 'shared/types'
+import { useResize } from 'shared/lib/resize'
 
 interface IFormValues {
     username: string
@@ -32,13 +33,19 @@ export const SignIn: FC<ISignIn> = ({ active }) => {
     const { t } = useTranslation()
     const navigate = useNavigate()
     const [isError, setIsError] = useState(false)
+    const { isMobileScreen } = useResize()
 
     const inputRef = useRef<HTMLInputElement>(null)
     useEffect(() => {
-        if (inputRef.current && active === LoginState.signIn) {
+        if (
+            inputRef.current &&
+            !isMobileScreen &&
+            active === LoginState.signIn
+        ) {
             inputRef.current.focus()
         }
-    }, [active])
+    }, [active, isMobileScreen])
+
     const handleLogin = async (values: IFormValues) => {
         login(values)
             .unwrap()

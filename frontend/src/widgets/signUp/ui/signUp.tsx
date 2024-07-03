@@ -19,6 +19,7 @@ import { ROUTES } from 'shared/constants'
 import { setCredentials } from 'shared/lib/auth'
 import { IAuthResponse, LoginState } from 'shared/types'
 import * as Yup from 'yup'
+import { useResize } from 'shared/lib/resize'
 
 interface IFormValues {
     username: string
@@ -33,13 +34,18 @@ interface ICreateAccount {
 export const CreateAccount: FC<ICreateAccount> = ({ active }) => {
     // use hook for navigate user
     const navigate = useNavigate()
+    const { isMobileScreen } = useResize()
 
     const inputRef = useRef<HTMLInputElement>(null)
     useEffect(() => {
-        if (inputRef.current && active === LoginState.singUp) {
+        if (
+            inputRef.current &&
+            !isMobileScreen &&
+            active === LoginState.singUp
+        ) {
             inputRef.current.focus()
         }
-    }, [active])
+    }, [active, isMobileScreen])
 
     // use hook for i18n and create user
     const [createUser, { isLoading }] = useCreateUserMutation()
