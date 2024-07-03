@@ -25,12 +25,18 @@ import { useResize } from 'shared/lib/resize'
 import { VectorFromRight } from 'shared/ui/vector'
 
 interface INewMessage {
-    channelId: string
-    isOpen: boolean
-    onOpen: () => void
+    readonly channelId: string
+    readonly isOpen: boolean
+    readonly onOpen: () => void
+    readonly isMessagesOpen: boolean
 }
 
-export const NewMessage: FC<INewMessage> = ({ channelId, isOpen, onOpen }) => {
+export const NewMessage: FC<INewMessage> = ({
+    channelId,
+    isOpen,
+    onOpen,
+    isMessagesOpen,
+}) => {
     const { t } = useTranslation()
 
     const [sendMessage, { isLoading }] = useSendMessageMutation()
@@ -41,7 +47,7 @@ export const NewMessage: FC<INewMessage> = ({ channelId, isOpen, onOpen }) => {
     const { isMobileScreen } = useResize()
 
     useEffect(() => {
-        if (inputRef.current) {
+        if (inputRef.current && !isMobileScreen && isMessagesOpen) {
             inputRef.current.focus()
         }
     })

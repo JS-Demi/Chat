@@ -100,6 +100,7 @@ export const Messages: FC<IMessages> = ({
                         channelId={activeChannelId}
                         isOpen={isEmojiOpen}
                         onOpen={onEmojiOpen}
+                        isMessagesOpen={isMessagesOpen}
                     />
                 </>
             )}
