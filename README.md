@@ -19,12 +19,12 @@ Chat for messaging between users in channels like a telegram, vk or Slack.
 
 ## Technology stack
 
-[@hexlet/chat-server](https://www.npmjs.com/package/@hexlet/chat-server) </br>
+[![@hexlet/chat-server][shields-hexlet-chat-server-domain]](https://www.npmjs.com/package/@hexlet/chat-server) </br>
 [![React][shields-react-domain]](https://react.dev/) </br>
 [![TypeScript][shields-typescript-domain]](https://www.typescriptlang.org/) </br>
 [![Redux Toolkit][shields-redux-domain]](https://redux-toolkit.js.org/) </br>
 [![React Router][shields-react-router-domain]](https://reactrouter.com/) </br>
-[![Socket.IO][shields-socket-io-domain]](https://reactrouter.com/) </br>
+[![Socket.IO][shields-socket-io-domain]](https://socket.io/) </br>
 [![Vite][shields-vite-domain]](https://vitejs.dev/) </br>
 [![Sass][shields-sass-domain]](https://sass-scss.ru/) </br>
 [![Feature-Sliced Design][shields-fsd-domain]](https://feature-sliced.design/) </br>
@@ -37,6 +37,7 @@ Chat for messaging between users in channels like a telegram, vk or Slack.
 [shields-redux-domain]: https://img.shields.io/badge/Redux--Toolkit-%23764abc?style=for-the-badge&logo=redux
 [shields-sass-domain]: https://img.shields.io/badge/sass-F2F2F2?style=for-the-badge&logo=sass
 [shields-socket-io-domain]: https://img.shields.io/badge/Socket.IO-black?style=for-the-badge&logo=socketdotio
+[shields-hexlet-chat-server-domain]: https://img.shields.io/badge/%40hexlet%2Fchat--server-%23433EFF?style=for-the-badge&logo=npm
 
 ## Getting started
 
