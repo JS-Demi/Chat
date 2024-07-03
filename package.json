@@ -1,13 +1,13 @@
 {
-	"name": "Chat",
+	"name": "@hexlet/code",
 	"version": "1.0.0",
 	"description": "[![Actions Status](https://github.com/JS-Demi/frontend-project-12/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/JS-Demi/frontend-project-12/actions)",
 	"main": "index.js",
 	"scripts": {
-		"build": "npm run build --prefix Chat",
-		"start": "start-server -s ./Chat/dist",
+		"build": "npm run build --prefix frontend",
+		"start": "start-server -s ./frontend/build",
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"postinstall": "cd Chat && npm ci"
+		"postinstall": "cd frontend && npm ci"
 	},
 	"author": "Miracle",
 	"license": "ISC",
